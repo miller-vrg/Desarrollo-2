@@ -1,6 +1,3 @@
-# Examen
-___
-
 **Estudiante:**\
 Miler vargas mola
 
