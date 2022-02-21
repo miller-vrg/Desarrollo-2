@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'Producto.dart';
 
 class Tienda{
 
@@ -15,19 +16,50 @@ Tienda(this._nombre,this._direccion,this._email,this._telefono,this._id,this._ni
 //          Metodos
 //-----------------------------------
 
-int menu(){
+menu(String vendedor){
 
 print("\n\n");
-print(".::: Bienvenido a ${_nombre} :::.");
+print(".::: Bienvenido ${vendedor} a ${_nombre} :::.");
 print("+----------- Menu --------------+");
-print("|1 | vender                     |");
-print("|2 | Registrar producto         |");
-print("|3 | Registrar vendedor         |");
-print("|4 | Buscar                     |");
+print("|1 | Registrar producto         |");
+print("|2 | Registrar vendedor         |");
+print("|3 | Buscar                     |");
 print("+-------------------------------+");
 stdout.write("Respuesta: ");
 var x = stdin.readLineSync().toString();
-return int.parse(x);
+var opc = int.parse(x);
+
+if ( opc == 1 ){
+
+print("------- Registrar Producto ----------");
+stdout.write("Nombre del producto: ");
+var x = stdin.readLineSync().toString();
+var nombre = x;
+
+stdout.write("Categoria: ");
+x = stdin.readLineSync().toString();
+var categoria = x;
+
+stdout.write("ID: ");
+x = stdin.readLineSync().toString();
+var id = int.parse(x);
+
+stdout.write("Garantia: ");
+x = stdin.readLineSync().toString();
+var garantia = int.parse(x);
+
+stdout.write("Precio: ");
+x = stdin.readLineSync().toString();
+var precio = double.parse(x);
+
+stdout.write("Iva: ");
+x = stdin.readLineSync().toString();
+var iva = double.parse(x);
+
+Producto producto = new Producto(nombre,id,categoria,garantia,precio,iva);
+
+}
+
 }
 
 //-----------------------------------

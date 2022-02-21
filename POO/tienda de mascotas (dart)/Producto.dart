@@ -6,6 +6,11 @@ double _precio,_iva;
 Producto(this._nombre,this._id,this._categoria,this._garantia,this._precio,this._iva);
 
 //-----------------------------------
+//          Metodos
+//-----------------------------------
+
+
+//-----------------------------------
 //          Encapculamiento
 //-----------------------------------
 
