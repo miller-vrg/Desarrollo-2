@@ -1,0 +1,119 @@
+@startuml
+
+class Alumno {
+
+- nombre:String
+- matricula:int
+- controlEscrito: ControlEscrito
+- practica: Practica
+
++ Alumno():void
++ setMatricula(int): void
++ getMatricula(): int
++ setNombre(String ): void
++ getNombre(): String
+
+}
+
+class ControlEscrito{
+
+- numeroControl:int
+- numeroPreguntas:int
+- fecha:String
+- nota:float
+
++ ControlEscrito():void
++ setNumeroControl(int): void
++ getNumeroControl(): int
++ setNumeroPreguntas(int):void
++ getNumeroPreguntas():int
++ setNota(float):void
++ getNota():float
++ evaluar()
+
+}
+
+class Practica{
+
+- codigo: int
+- fecha: date
+- nota: float
+
++ Practica():void
++ setCodigo(int):void
++ getCodigo(): int
++ setFecha(date): void
++ getFecha(): date
++ setNota(float):void
++ getNota():float
++ evaluar():void
+}
+
+abstract class ComplementoAlumno{
+   + evaluar(): abstract void
+}
+
+interface Examen{
+
+- preguntas: List <String> 
+-respuesta: List <String>
+
++ setPregunta(String):void
++ getPreguntas():List
++ setRespuesta(String):void
++ getRespuesta():List
+
+}
+
+class Profesores{
+
+- nombre:String
+- dni:int
+- crear: Crear
++ Profesores(): void
++ setNombre(String nombre):void
++ getNombre():string
++ setDni(int dni):void
++ getDni():int
+
+}
+
+class Crear{
+
+- autor: String
+- int numAutores
+- fecha:date
+
++ setAutor(String):void
++ getAutor():String
++ setNumAutores(int):void
++ getNumAutores():int
++ setFecha(date):void
++ getFecha():date
++ llenar(): void
++ Crear()
+
+}
+
+abstract class ComplementoProfesor{
+   + llenar(): abstract void
+}
+
+
+Alumno "1" *- "2" ControlEscrito :composición
+Alumno <. ControlEscrito 
+Alumno "1" *- "*" Practica :composición
+Alumno <. Practica
+
+ControlEscrito -|> ComplementoAlumno : extends
+Practica -|> ComplementoAlumno : extends
+
+ControlEscrito .|> Examen : implement
+Practica .|> Examen : implement
+
+Profesores "1...*" *- "*" Crear :agregación
+Crear -|> ComplementoProfesor: extends
+Crear .|> Examen : implement
+
+
+@enduml
