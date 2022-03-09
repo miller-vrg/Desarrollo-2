@@ -134,11 +134,21 @@ public class Home extends javax.swing.JFrame implements Runnable{
         jButton2.setBackground(new java.awt.Color(1, 25, 54));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/img/calificaciones.png"))); // NOI18N
         jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jpHome.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, -1, -1));
 
         jButton3.setBackground(new java.awt.Color(1, 25, 54));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/img/examen.png"))); // NOI18N
         jButton3.setBorder(null);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jpHome.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, -1, -1));
 
         jlBtn3.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 14)); // NOI18N
@@ -207,12 +217,33 @@ public class Home extends javax.swing.JFrame implements Runnable{
         if( ("Practica").equals(jlBtn1.getText()) ){
             
         jpIntercambio.add(new Contenedor("Practica").ver());
-        }else{
+        }else {
         jpIntercambio.add(new Contenedor("Creación de practica").ver());
 
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+    jpIntercambio.removeAll();
+    jpIntercambio.updateUI();
+    jpIntercambio.add(new Contenedor("Notas").ver());
+        
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+              if( ("Examen").equals(jlBtn3.getText()) ){
+        jpIntercambio.add(new Contenedor("Examen").ver());
+
+        }else {
+            jpIntercambio.add(new Contenedor("Creación de Examen").ver());
+        
+        }
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

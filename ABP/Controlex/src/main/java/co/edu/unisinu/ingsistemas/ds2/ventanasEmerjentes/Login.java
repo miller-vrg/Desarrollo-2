@@ -48,6 +48,7 @@ public class Login extends javax.swing.JDialog implements ItemListener{
         jtUsuario = new javax.swing.JTextField();
         bntLogin = new javax.swing.JButton();
         jcTipo = new javax.swing.JComboBox<>();
+        checkcontra = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(48, 49, 88));
@@ -88,10 +89,19 @@ public class Login extends javax.swing.JDialog implements ItemListener{
                 bntLoginActionPerformed(evt);
             }
         });
-        jPanel1.add(bntLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, 90, -1));
+        jPanel1.add(bntLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 90, -1));
 
         jcTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alumno", "Docente" }));
         jPanel1.add(jcTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 220, -1));
+
+        checkcontra.setForeground(new java.awt.Color(248, 217, 15));
+        checkcontra.setText("ver");
+        checkcontra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkcontraActionPerformed(evt);
+            }
+        });
+        jPanel1.add(checkcontra, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,6 +132,16 @@ public class Login extends javax.swing.JDialog implements ItemListener{
        
        veri();
     }//GEN-LAST:event_bntLoginActionPerformed
+
+    private void checkcontraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkcontraActionPerformed
+       if (checkcontra.isSelected()){
+           jpPassword.setEchoChar((char) 0);
+       }
+       else{
+       
+       jpPassword.setEchoChar('*');
+       }
+    }//GEN-LAST:event_checkcontraActionPerformed
 
     public void run() {
        
@@ -182,6 +202,7 @@ public class Login extends javax.swing.JDialog implements ItemListener{
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntLogin;
+    private javax.swing.JCheckBox checkcontra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> jcTipo;

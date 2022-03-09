@@ -44,11 +44,8 @@ public class Contenedor extends javax.swing.JPanel {
             try {
                 
                 File arch = new File("json/practicas/practicas.json");
-                System.out.print("47");
                 Object ob = new JSONParser().parse(new FileReader(arch));
-                System.out.print("48");
                 JSONObject js = (JSONObject) ob;
-                System.out.print("49");
                
               for( int n = 1; n < 6; n ++ ){
                   
@@ -62,9 +59,6 @@ public class Contenedor extends javax.swing.JPanel {
                          (String) mapPreguntas.get("res-C"),
                          (String) mapPreguntas.get("correcta")
                   ));
-                  
-
-System.out.print("50");
               }
                // JOptionPane.showMessageDialog(null,"Se abrio con exito la practica");
             } catch (Exception e) {
@@ -73,9 +67,35 @@ System.out.print("50");
 
          
        
+        } else if (("Examen").equals(jlEncabezado.getText())) {
+
+            try {
+
+                File arch = new File("json/practicas/practicas.json");
+                Object ob = new JSONParser().parse(new FileReader(arch));
+                JSONObject js = (JSONObject) ob;
+
+                for (int n = 1; n < 6; n++) {
+
+                    HashMap<String, String> mapPreguntas = (HashMap<String, String>) (Map) ((Map) js.get("Examen-1")).get("pre-" + n);
+
+                    jpContenedor.add(new ContenidoAlumno(
+                            (String) mapPreguntas.get("enunciado"),
+                            (String) mapPreguntas.get("res-A"),
+                            (String) mapPreguntas.get("res-B"),
+                            (String) mapPreguntas.get("res-C"),
+                            (String) mapPreguntas.get("correcta")
+                    ));
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error al abrir examen", "ERROR!!!", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }else if ( ("Creación de Examen").equals(jlEncabezado.getText())  ){
+                    jpContenedor.add(new ContenidoDocente("Crear Practica"));
+
         }else{
-           
-        jpContenedor.add(new ContenidoDocente("Crear Practica"));
+                jpContenedor.add(new Notas());
 
         }
     }
