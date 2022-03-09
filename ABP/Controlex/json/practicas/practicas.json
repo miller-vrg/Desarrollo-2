@@ -1,0 +1,39 @@
+{
+    "practica-1": {
+        "pre-5": {
+            "res-C": "C. 0",
+            "correcta": "A. 9",
+            "res-A": "A. 9",
+            "res-B": "B. 12",
+            "enunciado": "¿Cuanro es 2 * 2 + 3 + 2?"
+        },
+        "pre-4": {
+            "res-C": "C. Ni ella sabe",
+            "correcta": "C. Ni ella sabe",
+            "res-A": "A. Nose",
+            "res-B": "B. Ella dice que sí",
+            "enunciado": "¿Ella te ama?"
+        },
+        "pre-3": {
+            "res-C": "C. Un ave",
+            "correcta": "C. Un ave",
+            "res-A": "A. Una comida",
+            "res-B": "B. Una droga",
+            "enunciado": "¿Que es perico ?"
+        },
+        "pre-2": {
+            "res-C": "C. 0",
+            "correcta": "A. 8",
+            "res-A": "A. 8",
+            "res-B": "B. 16",
+            "enunciado": "¿Cuanto es 2 * 2 + 4?"
+        },
+        "pre-1": {
+            "res-C": "C. 4",
+            "correcta": "C. 4",
+            "res-A": "A. 2",
+            "res-B": "B. -4",
+            "enunciado": "¿Cuanto es 2 + 2?"
+        }
+    }
+}

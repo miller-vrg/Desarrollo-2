@@ -4,7 +4,21 @@
  */
 package co.edu.unisinu.ingsistemas.ds2.ventasDocente;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 /**
  *
@@ -16,8 +30,10 @@ public class ContenidoDocente extends javax.swing.JPanel {
      * Creates new form ContenidoDocente
      */
     public ContenidoDocente(String enunciado) {
+        i = 0;
+        contenido = new HashMap<String,HashMap>();
         initComponents();
-        jtEnunciado.setText("Creación de" + enunciado);
+        jtEnunciado.setText(enunciado);
         ButtonGroup grupo = new ButtonGroup();
         grupo.add(jrA);
         grupo.add(jrB);
@@ -43,6 +59,7 @@ public class ContenidoDocente extends javax.swing.JPanel {
         jtResB = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
+        btnTerminal = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(1, 25, 54));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,7 +72,7 @@ public class ContenidoDocente extends javax.swing.JPanel {
         jtEnunciado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(1, 25, 54)));
         jScrollPane1.setViewportView(jtEnunciado);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 450, 110));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 450, 110));
 
         jrC.setForeground(new java.awt.Color(248, 217, 15));
         jrC.setText("C");
@@ -64,7 +81,7 @@ public class ContenidoDocente extends javax.swing.JPanel {
                 jrCActionPerformed(evt);
             }
         });
-        add(jrC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 60, -1));
+        add(jrC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 60, -1));
 
         jrA.setForeground(new java.awt.Color(248, 217, 15));
         jrA.setText("A");
@@ -73,31 +90,36 @@ public class ContenidoDocente extends javax.swing.JPanel {
                 jrAActionPerformed(evt);
             }
         });
-        add(jrA, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 50, -1));
+        add(jrA, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 50, -1));
 
         jrB.setForeground(new java.awt.Color(248, 217, 15));
         jrB.setText("B");
-        add(jrB, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 50, -1));
+        add(jrB, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 50, -1));
 
         jtResC.setBackground(new java.awt.Color(1, 25, 54));
         jtResC.setForeground(new java.awt.Color(248, 217, 15));
-        add(jtResC, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 410, -1));
+        add(jtResC, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 410, -1));
 
         jtResA.setBackground(new java.awt.Color(1, 25, 54));
         jtResA.setColumns(20);
         jtResA.setForeground(new java.awt.Color(248, 217, 15));
-        add(jtResA, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 410, -1));
+        add(jtResA, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 410, -1));
 
         jtResB.setBackground(new java.awt.Color(1, 25, 54));
         jtResB.setForeground(new java.awt.Color(248, 217, 15));
-        add(jtResB, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 410, -1));
+        add(jtResB, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 410, -1));
 
         btnLimpiar.setBackground(new java.awt.Color(1, 25, 54));
         btnLimpiar.setForeground(new java.awt.Color(248, 217, 15));
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/img/limpiar.png"))); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, 40));
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, 40));
 
         btnGuardar.setBackground(new java.awt.Color(1, 25, 54));
         btnGuardar.setForeground(new java.awt.Color(248, 217, 15));
@@ -109,7 +131,19 @@ public class ContenidoDocente extends javax.swing.JPanel {
                 btnGuardarActionPerformed(evt);
             }
         });
-        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, 130, 40));
+        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, 130, 40));
+
+        btnTerminal.setBackground(new java.awt.Color(1, 25, 54));
+        btnTerminal.setForeground(new java.awt.Color(248, 217, 15));
+        btnTerminal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/img/tarea.png"))); // NOI18N
+        btnTerminal.setText("Finalizar");
+        btnTerminal.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        btnTerminal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminalActionPerformed(evt);
+            }
+        });
+        add(btnTerminal, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 150, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrAActionPerformed
@@ -121,13 +155,80 @@ public class ContenidoDocente extends javax.swing.JPanel {
     }//GEN-LAST:event_jrCActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+
+        i ++;
+        guardar();
+       
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminalActionPerformed
 
+        if (contenido == null) {
+
+        } else {
+            int veri = JOptionPane.showConfirmDialog(null, "No has guardado nada seguro quieres salir?", "Confirme salida", JOptionPane.YES_NO_OPTION);
+
+            if (veri == JOptionPane.YES_OPTION) {
+
+                try {
+                    String ruta = "json/practicas/practicas.json";
+                    JSONObject js = new JSONObject();
+                    String codigo  = JOptionPane.showInputDialog(null,"Dijte el codigo de la practica: ");
+                    js.put(codigo, contenido);
+                    Files.write(Paths.get(ruta), js.toJSONString().getBytes());
+
+                    JOptionPane.showMessageDialog(null, "Guardado conexito");
+
+                    limpiar();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Archivo no existete o fuera de la ruta", "Error al guardar!!!", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+        }
+
+    }//GEN-LAST:event_btnTerminalActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+
+        limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    
+    private void limpiar(){
+    
+        jtEnunciado.setText("");
+        jtResA.setText("");
+        jtResB.setText("");
+        jtResC.setText("");
+        
+    }
+    
+    
+    private void guardar() {
+
+        
+            String res = "A. " + jtResA.getText();
+            res = (jrB.isSelected()) ? "B. " + jtResB.getText() : res;
+            res = (jrC.isSelected()) ? "C. " + jtResC.getText() : res;
+            
+            HashMap<String,String> contenidoPreguntas = new HashMap<String,String>();
+            contenidoPreguntas.put("enunciado", jtEnunciado.getText());
+            contenidoPreguntas.put("res-A", "A. " + jtResA.getText());
+            contenidoPreguntas.put("res-B", "B. " + jtResB.getText());
+            contenidoPreguntas.put("res-C", "C. " + jtResC.getText());
+            contenidoPreguntas.put("correcta", res);
+            contenido.put("pre-" + i, contenidoPreguntas);
+       
+    }
+
+    private int i;
+    private String nameCuestion;
+    private HashMap<String,HashMap> contenido;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnTerminal;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton jrA;
     private javax.swing.JRadioButton jrB;

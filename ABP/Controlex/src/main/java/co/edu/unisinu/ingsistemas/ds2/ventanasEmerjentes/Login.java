@@ -1,10 +1,17 @@
 package co.edu.unisinu.ingsistemas.ds2.ventanasEmerjentes;
 
 import co.edu.unisinu.ingsistemas.ds2.ventanas.Home;
-import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
+
 
 /**
  *
@@ -39,7 +46,7 @@ public class Login extends javax.swing.JDialog implements ItemListener{
         jLabel1 = new javax.swing.JLabel();
         jpPassword = new javax.swing.JPasswordField();
         jtUsuario = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        bntLogin = new javax.swing.JButton();
         jcTipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -53,7 +60,7 @@ public class Login extends javax.swing.JDialog implements ItemListener{
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/img/usuario.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, -1, -1));
 
         jpPassword.setColumns(20);
         jpPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248, 217, 15)));
@@ -62,31 +69,29 @@ public class Login extends javax.swing.JDialog implements ItemListener{
                 jpPasswordActionPerformed(evt);
             }
         });
-        jPanel1.add(jpPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, 160, 20));
+        jPanel1.add(jpPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 220, 20));
 
         jtUsuario.setColumns(20);
         jtUsuario.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jtUsuario.setText("Usuario");
         jtUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248, 217, 15)));
         jtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtUsuarioActionPerformed(evt);
             }
         });
-        jPanel1.add(jtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 160, 20));
+        jPanel1.add(jtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 220, 20));
 
-        jButton1.setBackground(new java.awt.Color(248, 217, 15));
-        jButton1.setText("Login");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(48, 49, 88), 1, true));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bntLogin.setBackground(new java.awt.Color(248, 217, 15));
+        bntLogin.setText("Iniciar");
+        bntLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bntLoginActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 70, -1));
+        jPanel1.add(bntLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, 90, -1));
 
         jcTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alumno", "Docente" }));
-        jPanel1.add(jcTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 160, -1));
+        jPanel1.add(jcTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 220, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,23 +115,13 @@ public class Login extends javax.swing.JDialog implements ItemListener{
         // TODO add your handling code here:
     }//GEN-LAST:event_jpPasswordActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bntLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLoginActionPerformed
 
+       usuario = jtUsuario.getText();
+       password = (String) jpPassword.getSelectedText();
+       
        veri();
-       setVisible(false);
-       
-       if(("Alumno").equals(seleccion)){
-
-                Home h = new Home("Alumno: " + jtUsuario.getText(),"Practica","Examen");
-                
-                }else{
-
-                Home h = new Home("Docente: " + jtUsuario.getText(),"Crear Practica","Craer Examen");
-                }
-       
-       
-       
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bntLoginActionPerformed
 
     public void run() {
        
@@ -146,20 +141,47 @@ public class Login extends javax.swing.JDialog implements ItemListener{
         });
     }
 
-    public boolean veri() {
-        
-        if (isVeri() == true) {
-            JOptionPane.showMessageDialog(null, "Inicio exitoso");             
-            return true;
+    public void veri() {
+
+        usuario = jtUsuario.getText();
+        password = new String(jpPassword.getPassword());
+
+        try {
+
+            File arch = new File("json/usuarios/usuarios.json");
+
+            Object ob = new JSONParser().parse(new FileReader(arch));
+            JSONObject js = (JSONObject) ob;
+
+            HashMap<String,String> p = (HashMap<String, String>) (Map) js.get("87223");
+
+            if ((usuario).equals(p.get("matricula")) && (password).equals(p.get("password"))) {
+
+                JOptionPane.showMessageDialog(null, "Inicio exitoso");
+                //setVisible(false);
+               dispose();
+                
+                if (("Alumno").equals(seleccion)) {
+
+                    Home h = new Home("Alumno: " + p.get("name"), "Practica", "Examen");
+
+                } else {
+
+                    Home h = new Home("Docente: " + p.get("name"), "Crear Practica", "Craer Examen");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña no valido", "Error!", JOptionPane.WARNING_MESSAGE);
+            }
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "Algo salio mal", "Error!", JOptionPane.WARNING_MESSAGE);
+
         }
-        else{
-        JOptionPane.showMessageDialog(null,"Usuario o contraseña no valido","Error!",JOptionPane.ERROR_MESSAGE);
-        return false;
-        }
-        
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bntLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> jcTipo;
@@ -171,17 +193,6 @@ public class Login extends javax.swing.JDialog implements ItemListener{
     private String password;
     private String usuario;
     
-    /**
-     * @return the veri
-     */
-    public boolean isVeri() {
-        return veri;
-    }
-
-    public void setVeri(boolean veri) {
-        this.veri = veri;
-    }
-
     public String getSeleccion() {
         return seleccion;
     }

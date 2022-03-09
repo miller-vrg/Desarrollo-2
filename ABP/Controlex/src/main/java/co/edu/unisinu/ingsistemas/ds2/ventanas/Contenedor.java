@@ -3,9 +3,18 @@ package co.edu.unisinu.ingsistemas.ds2.ventanas;
 import co.edu.unisinu.ingsistemas.ds2.ventasAlumno.*;
 import co.edu.unisinu.ingsistemas.ds2.ventasDocente.ContenidoDocente;
 import java.awt.FlowLayout;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 /**
  *
@@ -31,10 +40,41 @@ public class Contenedor extends javax.swing.JPanel {
         jpContenedor.setLayout(new BoxLayout(jpContenedor,BoxLayout.Y_AXIS));
         
         if( ("Practica").equals(jlEncabezado.getText()) ){
-        jpContenedor.add(new ContenidoAlumno("¿Que es perico?","Un ave","Drogas","Comida"));
-         jpContenedor.add(new ContenidoAlumno("¿Cuanto es 2 +2 ?","2","0","4"));
+            
+            try {
+                
+                File arch = new File("json/practicas/practicas.json");
+                System.out.print("47");
+                Object ob = new JSONParser().parse(new FileReader(arch));
+                System.out.print("48");
+                JSONObject js = (JSONObject) ob;
+                System.out.print("49");
+               
+              for( int n = 1; n < 6; n ++ ){
+                  
+              
+                  HashMap<String,String> mapPreguntas = (HashMap<String,String>) (Map)((Map)js.get("practica-1")).get("pre-" + n);
+                  
+                  jpContenedor.add(new ContenidoAlumno(
+                         (String) mapPreguntas.get("enunciado"), 
+                         (String) mapPreguntas.get("res-A"), 
+                         (String) mapPreguntas.get("res-B"), 
+                         (String) mapPreguntas.get("res-C"),
+                         (String) mapPreguntas.get("correcta")
+                  ));
+                  
+
+System.out.print("50");
+              }
+               // JOptionPane.showMessageDialog(null,"Se abrio con exito la practica");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Error al abrir practica","ERROR!!!",JOptionPane.ERROR_MESSAGE);
+            }
+
+         
        
         }else{
+           
         jpContenedor.add(new ContenidoDocente("Crear Practica"));
 
         }
@@ -89,7 +129,7 @@ public class Contenedor extends javax.swing.JPanel {
         jpContenedor.setLayout(new javax.swing.BoxLayout(jpContenedor, javax.swing.BoxLayout.LINE_AXIS));
         jScrollPane1.setViewportView(jpContenedor);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 550, 420));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 550, 370));
 
         jbtnEnviar.setBackground(new java.awt.Color(1, 25, 54));
         jbtnEnviar.setForeground(new java.awt.Color(248, 217, 15));

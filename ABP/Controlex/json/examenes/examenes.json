@@ -1,0 +1,10 @@
+{
+    "primer quiz":{ 
+      "apertura"  : "2022-07-12",
+        "pregunta -1 " : "¿Cuantos es 2 + 2?",
+        "A" : "2",
+        "B" : "4",
+        "C" : "0",
+        "res" : "A"
+    }
+}

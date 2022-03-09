@@ -1,0 +1,11 @@
+{
+    "materias" :{
+        "miller-vrg" : {
+        "Matematicas": "0",
+        "Sociales": "0",
+        "Informatica": "0",
+        "Fisica": "0",
+        "Quimica": "0"
+         }
+    }
+}
