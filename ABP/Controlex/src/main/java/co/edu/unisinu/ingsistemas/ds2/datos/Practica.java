@@ -5,6 +5,7 @@ package co.edu.unisinu.ingsistemas.ds2.datos;
  * @author gasler (Miller vargas mola)
  * 
  */
+
 class Practica {
     
 private int odigo;

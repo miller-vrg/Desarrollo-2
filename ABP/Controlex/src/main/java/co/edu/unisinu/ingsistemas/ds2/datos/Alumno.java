@@ -33,6 +33,7 @@ public Alumno(){}
     /**
      * @return the matricula
      */
+    
     public int getMatricula() {
         return matricula;
     }
@@ -40,6 +41,7 @@ public Alumno(){}
     /**
      * @param matricula the matricula to set
      */
+    
     public void setMatricula(int matricula) {
         this.matricula = matricula;
     }
