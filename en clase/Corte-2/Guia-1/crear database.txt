@@ -1,0 +1,37 @@
+CREATE TABLE Usuarios(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	clave VARCHAR(20) NULL DEFAULT 'abcde',
+	cedula VARCHAR(15) UNIQUE NULL,
+	nombre VARCHAR(50) NOT NULL,
+	apellido VARCHAR(70) NOT NULL,
+	fecha_nacimiento DATE NULL,
+	genero VARCHAR(12) DEFAULT 'Masculino',
+	telefono VARCHAR(15) NULL,
+	email VARCHAR(70) UNIQUE,
+	direccio TEXT NULL	
+)ENGINE=INNODB;
+
+-- CREAR TABLA
+
+CREATE TABLE Gastos(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	fecha DATE NOT NULL,
+	fecha_registro DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+	nombre VARCHAR(50) NOT NULL,
+	precio FLOAT NOT NULL,
+	categoria VARCHAR(70) NOT NULL,
+	descripcion TEXT NULL,
+	usuario_id INT
+)ENGINE=INNODB;
+
+-- crear indice de la clave foranea usuario_id
+
+CREATE INDEX gastos_usuarios_idx ON Gastos(usuario_id);
+
+-- alterar la tabalka Gastos para agregar la clave foranea
+
+ALTER TABLE Gastos ADD CONSTRAINT gastosusuarios_fk
+FOREIGN KEY (usuario_id) REFERENCES Usuarios(id);
+
+
+
