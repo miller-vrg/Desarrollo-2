@@ -1,13 +1,11 @@
 @startuml
-
-class Alumno {
+!theme reddress-lightgreen
+class Estudiantes {
 
 - nombre:String
 - matricula:int
-- controlEscrito: ControlEscrito
-- practica: Practica
 
-+ Alumno():void
++ Estudiantes():void
 + setMatricula(int): void
 + getMatricula(): int
 + setNombre(String ): void
@@ -15,105 +13,147 @@ class Alumno {
 
 }
 
-class ControlEscrito{
+class Pruebas{
 
-- numeroControl:int
-- numeroPreguntas:int
-- fecha:String
-- nota:float
+- name: String
+- apertura: date
+- contenido: List<Preguntas>
+- porcentaje: float
+- descripcion: String
 
-+ ControlEscrito():void
-+ setNumeroControl(int): void
-+ getNumeroControl(): int
-+ setNumeroPreguntas(int):void
-+ getNumeroPreguntas():int
-+ setNota(float):void
-+ getNota():float
-+ evaluar()
-
-}
-
-class Practica{
-
-- codigo: int
-- fecha: date
-- nota: float
-
-+ Practica():void
-+ setCodigo(int):void
-+ getCodigo(): int
-+ setFecha(date): void
-+ getFecha(): date
-+ setNota(float):void
-+ getNota():float
-+ evaluar():void
-}
-
-abstract class ComplementoAlumno{
-   + evaluar(): abstract void
-}
-
-interface Examen{
-
-- preguntas: List <String> 
--respuesta: List <String>
-
-+ setPregunta(String):void
-+ getPreguntas():List
-+ setRespuesta(String):void
-+ getRespuesta():List
++ Pruebas():void
++ setCodigo(String):void
++ getCodigo():STring
++ setApertura(date):void
++ getApertura():date
++ setContenido(List):void
++ getContenido():List
++ setPorcentaje(float):void
++ getPorcentaje():float
++ setDescripcion(String):void
++ getDescripcion():String
 
 }
 
-class Profesores{
+class Practicas{
 
-- nombre:String
+- intentos:int
+
++ Practicas():void
++ setIntentos(int):void
++ getIntentos():int
+}
+
+class Examenes{
+
+- cierre:date
+
++ Examenes():void
++ setCierre(date):void
++ getCierre():date
+
+}
+
+class Docentes{
+
+- name:String
 - dni:int
-- crear: Crear
-+ Profesores(): void
-+ setNombre(String nombre):void
-+ getNombre():string
-+ setDni(int dni):void
+
++ Docentes():void
++ setName(String):void
++ getName():String
++ setDni(int):void
 + getDni():int
 
 }
 
-class Crear{
+class Creaciones{
 
-- autor: String
-- int numAutores
-- fecha:date
+- name:String
+- tipo:String
+- fecha_creacion:date
+- apertura:date
+- cierre:date
+- colaboradores:String
 
-+ setAutor(String):void
-+ getAutor():String
-+ setNumAutores(int):void
-+ getNumAutores():int
++ Creaciones():void
++ setName(String):void
++ getName():String
++ seTipo(String):void
++ geTipo():String
 + setFecha(date):void
-+ getFecha():date
-+ llenar(): void
-+ Crear()
++getFecha();date
++ setApertura(Date):void
++ getApertura():Date
++ setCierre(date);void
++ getCierre():date
 
 }
 
-abstract class ComplementoProfesor{
-   + llenar(): abstract void
+class ListaNotas{
+ - Registro:List<Realizaciones>
+
++ Notas():void
++ setRegistro():void
++ getRegisto():List<Realizaciones>
+}
+
+class Realizaciones{
+- nota:float
+
++ Realizaciones():void
++ setNota(float).void
++ getNota():float
 }
 
 
-Alumno "1" *- "2" ControlEscrito :composición
-Alumno <. ControlEscrito 
-Alumno "1" *- "*" Practica :composición
-Alumno <. Practica
+class Preguntas{
+- encabezado:String
 
-ControlEscrito -|> ComplementoAlumno : extends
-Practica -|> ComplementoAlumno : extends
++ Preguntas():void
++ setEnacabezado(String):void
++ getEncabezado():String
+}
 
-ControlEscrito .|> Examen : implement
-Practica .|> Examen : implement
+class Opciones{
+-id:int
+- opcion_a:String
+- opcion_b:String
+- opcion_c:String
 
-Profesores "1...*" *- "*" Crear :agregación
-Crear -|> ComplementoProfesor: extends
-Crear .|> Examen : implement
++ Opciones():void
++ setA(String):void
++ getA():String
++ setB(String):void
++ getB():String
++ setC(String):void
++ getC():String
+}
+
+class Respuestas{
+- opcion_correcta:String
+
++ Respuestas():void
++ setOpcionCorrecta(String):void
++ getOpcionCorrecta():String
+}
+
+Estudiantes "1..*" }-- "0..*" Realizaciones
+
+Docentes "1..*" }-- "0..*" ListaNotas
+Docentes "1..*" }-- "1" Creaciones
+
+ListaNotas "1" --{ "0..*" Realizaciones
+
+Pruebas "1" -- "1" Creaciones
+Pruebas "1..*" }-- "1" Realizaciones
+Pruebas "1" --{ "1..*" Preguntas
+Pruebas <|--  Examenes
+Pruebas <|--  Practicas
+
+Preguntas "1" --{ "1..*" Opciones
+Preguntas "1" -- "1" Respuestas
+
 
 
 @enduml

@@ -1,0 +1,19 @@
+CREATE TABLE Registros_abp.estudiantes (
+	matricula int PRIMARY KEY auto_increment NOT NULL,
+	password VARCHAR(10) DEFAULT 'abc123' NULL,
+	name varchar(12) NOT NULL,
+	apellido_1 varchar(12) NOT NULL,
+	apellido_2 varchar(12) NOT NULL
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=latin1
+COLLATE=latin1_swedish_ci;
+
+CREATE TABLE Registros_abp.realizaciones (
+	id INT PRIMARY KEY auto_increment NULL,
+	notas FLOAT DEFAULT 0 NULL,
+	id_alumno_fk varchar(100) NOT NULL
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=latin1
+COLLATE=latin1_swedish_ci;
