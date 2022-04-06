@@ -61,12 +61,14 @@ public class ContenidoDocente extends javax.swing.JPanel {
         btnGuardar = new javax.swing.JButton();
         btnTerminal = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(1, 25, 54));
+        setBackground(new java.awt.Color(41, 41, 77));
+        setForeground(new java.awt.Color(255, 214, 141));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jtEnunciado.setBackground(new java.awt.Color(1, 25, 54));
+        jtEnunciado.setBackground(new java.awt.Color(41, 41, 77));
         jtEnunciado.setColumns(20);
-        jtEnunciado.setForeground(new java.awt.Color(248, 217, 15));
+        jtEnunciado.setFont(new java.awt.Font("URW Bookman", 1, 13)); // NOI18N
+        jtEnunciado.setForeground(new java.awt.Color(255, 214, 141));
         jtEnunciado.setRows(5);
         jtEnunciado.setText("Enunciado");
         jtEnunciado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(1, 25, 54)));
@@ -74,7 +76,8 @@ public class ContenidoDocente extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 450, 110));
 
-        jrC.setForeground(new java.awt.Color(248, 217, 15));
+        jrC.setFont(new java.awt.Font("URW Bookman", 1, 13)); // NOI18N
+        jrC.setForeground(new java.awt.Color(255, 214, 141));
         jrC.setText("C");
         jrC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +86,8 @@ public class ContenidoDocente extends javax.swing.JPanel {
         });
         add(jrC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 60, -1));
 
-        jrA.setForeground(new java.awt.Color(248, 217, 15));
+        jrA.setFont(new java.awt.Font("URW Bookman", 1, 13)); // NOI18N
+        jrA.setForeground(new java.awt.Color(255, 214, 141));
         jrA.setText("A");
         jrA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,25 +96,30 @@ public class ContenidoDocente extends javax.swing.JPanel {
         });
         add(jrA, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 50, -1));
 
-        jrB.setForeground(new java.awt.Color(248, 217, 15));
+        jrB.setFont(new java.awt.Font("URW Bookman", 1, 13)); // NOI18N
+        jrB.setForeground(new java.awt.Color(255, 214, 141));
         jrB.setText("B");
         add(jrB, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 50, -1));
 
-        jtResC.setBackground(new java.awt.Color(1, 25, 54));
-        jtResC.setForeground(new java.awt.Color(248, 217, 15));
+        jtResC.setBackground(new java.awt.Color(41, 41, 77));
+        jtResC.setFont(new java.awt.Font("URW Bookman", 0, 13)); // NOI18N
+        jtResC.setForeground(new java.awt.Color(255, 214, 141));
         add(jtResC, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 410, -1));
 
-        jtResA.setBackground(new java.awt.Color(1, 25, 54));
+        jtResA.setBackground(new java.awt.Color(41, 41, 77));
         jtResA.setColumns(20);
-        jtResA.setForeground(new java.awt.Color(248, 217, 15));
+        jtResA.setFont(new java.awt.Font("URW Bookman", 0, 13)); // NOI18N
+        jtResA.setForeground(new java.awt.Color(255, 214, 141));
         add(jtResA, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 410, -1));
 
-        jtResB.setBackground(new java.awt.Color(1, 25, 54));
-        jtResB.setForeground(new java.awt.Color(248, 217, 15));
+        jtResB.setBackground(new java.awt.Color(41, 41, 77));
+        jtResB.setFont(new java.awt.Font("URW Bookman", 0, 13)); // NOI18N
+        jtResB.setForeground(new java.awt.Color(255, 214, 141));
         add(jtResB, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 410, -1));
 
-        btnLimpiar.setBackground(new java.awt.Color(1, 25, 54));
-        btnLimpiar.setForeground(new java.awt.Color(248, 217, 15));
+        btnLimpiar.setBackground(new java.awt.Color(255, 214, 141));
+        btnLimpiar.setFont(new java.awt.Font("URW Bookman", 1, 13)); // NOI18N
+        btnLimpiar.setForeground(new java.awt.Color(41, 41, 77));
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/img/limpiar.png"))); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -121,8 +130,9 @@ public class ContenidoDocente extends javax.swing.JPanel {
         });
         add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, 40));
 
-        btnGuardar.setBackground(new java.awt.Color(1, 25, 54));
-        btnGuardar.setForeground(new java.awt.Color(248, 217, 15));
+        btnGuardar.setBackground(new java.awt.Color(255, 214, 141));
+        btnGuardar.setFont(new java.awt.Font("URW Bookman", 1, 13)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(41, 41, 77));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/img/guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -133,8 +143,9 @@ public class ContenidoDocente extends javax.swing.JPanel {
         });
         add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 310, 130, 40));
 
-        btnTerminal.setBackground(new java.awt.Color(1, 25, 54));
-        btnTerminal.setForeground(new java.awt.Color(248, 217, 15));
+        btnTerminal.setBackground(new java.awt.Color(255, 214, 141));
+        btnTerminal.setFont(new java.awt.Font("URW Bookman", 1, 13)); // NOI18N
+        btnTerminal.setForeground(new java.awt.Color(41, 41, 77));
         btnTerminal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/img/tarea.png"))); // NOI18N
         btnTerminal.setText("Finalizar");
         btnTerminal.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -171,11 +182,8 @@ public class ContenidoDocente extends javax.swing.JPanel {
             if (veri == JOptionPane.YES_OPTION) {
 
                 try {
-                    String ruta = "json/practicas/practicas.json";
-                    JSONObject js = new JSONObject();
-                    String codigo  = JOptionPane.showInputDialog(null,"Dijte el codigo de la practica: ");
-                    js.put(codigo, contenido);
-                    Files.write(Paths.get(ruta), js.toJSONString().getBytes());
+                    
+                    
 
                     JOptionPane.showMessageDialog(null, "Guardado conexito");
 

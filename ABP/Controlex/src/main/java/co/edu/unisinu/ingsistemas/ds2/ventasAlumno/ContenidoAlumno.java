@@ -1,5 +1,15 @@
 package co.edu.unisinu.ingsistemas.ds2.ventasAlumno;
 
+import co.edu.unisinu.ingsistemas.ds2.conector.Conector;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -12,7 +22,10 @@ public class ContenidoAlumno extends javax.swing.JPanel {
     /**
      * Creates new form Contenido
      */
-    public ContenidoAlumno(String enunciado, String resA, String resB, String resC, String correcta) {
+    
+    
+    public ContenidoAlumno(){};
+    public JPanel conte(String enunciado, String resA, String resB, String resC) {
         initComponents();
         
         jtEnunciado.setText(enunciado);
@@ -20,10 +33,12 @@ public class ContenidoAlumno extends javax.swing.JPanel {
         jrB.setText(resB);
         jrC.setText(resC);
         
-        ButtonGroup group = new ButtonGroup();
+        group = new ButtonGroup();
         group.add(jrA);
         group.add(jrB);
         group.add(jrC);
+        
+        return this;
     }
 
     @SuppressWarnings("unchecked")
@@ -41,13 +56,14 @@ public class ContenidoAlumno extends javax.swing.JPanel {
 
         jButton1.setText("jButton1");
 
-        setBackground(new java.awt.Color(1, 25, 54));
+        setBackground(new java.awt.Color(41, 41, 77));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtEnunciado.setEditable(false);
-        jtEnunciado.setBackground(new java.awt.Color(1, 25, 54));
+        jtEnunciado.setBackground(new java.awt.Color(41, 41, 77));
         jtEnunciado.setColumns(20);
-        jtEnunciado.setForeground(new java.awt.Color(248, 217, 15));
+        jtEnunciado.setFont(new java.awt.Font("URW Bookman", 1, 13)); // NOI18N
+        jtEnunciado.setForeground(new java.awt.Color(255, 214, 141));
         jtEnunciado.setRows(5);
         jtEnunciado.setText("Enunciado");
         jtEnunciado.setBorder(null);
@@ -56,7 +72,8 @@ public class ContenidoAlumno extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 450, 110));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 500, 20));
 
-        jrC.setForeground(new java.awt.Color(248, 217, 15));
+        jrC.setFont(new java.awt.Font("URW Bookman", 0, 13)); // NOI18N
+        jrC.setForeground(new java.awt.Color(255, 214, 141));
         jrC.setText("C.");
         jrC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,7 +82,8 @@ public class ContenidoAlumno extends javax.swing.JPanel {
         });
         add(jrC, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 450, -1));
 
-        jrA.setForeground(new java.awt.Color(248, 217, 15));
+        jrA.setFont(new java.awt.Font("URW Bookman", 0, 13)); // NOI18N
+        jrA.setForeground(new java.awt.Color(255, 214, 141));
         jrA.setText("A.");
         jrA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,22 +92,132 @@ public class ContenidoAlumno extends javax.swing.JPanel {
         });
         add(jrA, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 450, -1));
 
-        jrB.setForeground(new java.awt.Color(248, 217, 15));
+        jrB.setFont(new java.awt.Font("URW Bookman", 0, 13)); // NOI18N
+        jrB.setForeground(new java.awt.Color(255, 214, 141));
         jrB.setText("B.");
+        jrB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrBActionPerformed(evt);
+            }
+        });
         add(jrB, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 450, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrCActionPerformed
-        // TODO add your handling code here:
+
+        int dialogButton = JOptionPane.showConfirmDialog(null, "Despues de elejir la respuesta no la podras cabiar,\n ¿estas seguro de tu elecciòn?", "Confirmaciòn", JOptionPane.YES_NO_OPTION);
+        if (dialogButton == JOptionPane.YES_OPTION) {
+
+            try {
+                File arch = new File("respuestas.txt");
+                if (arch.createNewFile()) {
+                    System.out.println("Se creo creo el archivo de respuestas de usuario " + arch.getName());
+                    FileWriter escribir = new FileWriter(arch, true);
+                    escribir.write("-" + jrC.getText());
+                    escribir.close();
+                    System.out.println("Successfully");
+                } else {
+                    System.out.println("El archivo de respuestas de usuario ya existe");
+                    FileWriter escribir = new FileWriter(arch, true);
+                    escribir.write("-" + jrC.getText());
+                    escribir.close();
+                    System.out.println("Successfully");
+                }
+            } catch (IOException e) {
+                System.out.println("error al crear archivo de respuesta");
+                JOptionPane.showMessageDialog(null, "Error no se pueden guardar las respuestas", "ERROR!!!", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+            jrA.setEnabled(false);
+            jrB.setEnabled(false);
+            jrC.setEnabled(false);
+        }
+        if (dialogButton == JOptionPane.NO_OPTION) {
+
+        }
+
+        System.out.print(respuesta);
+
     }//GEN-LAST:event_jrCActionPerformed
 
     private void jrAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrAActionPerformed
-        // TODO add your handling code here:
+
+        int dialogButton = JOptionPane.showConfirmDialog(null, "Despues de elejir la respuesta no la podras cabiar,\n ¿estas seguro de tu elecciòn?", "Confirmaciòn", JOptionPane.YES_NO_OPTION);
+        if (dialogButton == JOptionPane.YES_OPTION) {
+
+            try {
+                File arch = new File("respuestas.txt");
+                if (arch.createNewFile()) {
+                    System.out.println("Se creo creo el archivo de respuestas de usuario " + arch.getName());
+                    FileWriter escribir = new FileWriter(arch, true);
+                    escribir.write("-" + jrA.getText());
+                    escribir.close();
+                    System.out.println("Successfully");
+                } else {
+                    System.out.println("El archivo de respuestas de usuario ya existe");
+                    FileWriter escribir = new FileWriter(arch, true);
+                    escribir.write("-" + jrA.getText());
+                    escribir.close();
+                    System.out.println("Successfully");
+                }
+            } catch (IOException e) {
+                System.out.println("error al crear archivo de respuesta");
+                JOptionPane.showMessageDialog(null, "Error no se pueden guardar las respuestas", "ERROR!!!", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+            jrA.setEnabled(false);
+            jrB.setEnabled(false);
+            jrC.setEnabled(false);
+        }
+        if (dialogButton == JOptionPane.NO_OPTION) {
+
+        }
+
+        System.out.print(respuesta);
     }//GEN-LAST:event_jrAActionPerformed
 
-        public JPanel ver(){
+    private void jrBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrBActionPerformed
+
+        int dialogButton = JOptionPane.showConfirmDialog(null, "Despues de elejir la respuesta no la podras cabiar,\n ¿estas seguro de tu elecciòn?", "Confirmaciòn", JOptionPane.YES_NO_OPTION);
+        if (dialogButton == JOptionPane.YES_OPTION) {
+            try {
+                File arch = new File("respuestas.txt");
+                if (arch.createNewFile()) {
+                    System.out.println("Se creo creo el archivo de respuestas de usuario " + arch.getName());
+                    FileWriter escribir = new FileWriter(arch, true);
+                    escribir.write("-" + jrB.getText());
+                    escribir.close();
+                    System.out.println("Successfully");
+                } else {
+                    System.out.println("El archivo de respuestas de usuario ya existe");
+                    FileWriter escribir = new FileWriter(arch, true);
+                    escribir.write("-" + jrB.getText());
+                    escribir.close();
+                    System.out.println("Successfully");
+                }
+            } catch (IOException e) {
+                System.out.println("error al crear archivo de respuesta");
+                JOptionPane.showMessageDialog(null, "Error no se pueden guardar las respuestas", "ERROR!!!", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+            jrA.setEnabled(false);
+            jrB.setEnabled(false);
+            jrC.setEnabled(false);
+        }
+        if (dialogButton == JOptionPane.NO_OPTION) {
+
+        }
+        System.out.print(respuesta);
+    }//GEN-LAST:event_jrBActionPerformed
+
+    public String getRespuesta(){
+    return respuesta;
+    }
+   
+    public JPanel ver(){
     return this;}
 
+    private String respuesta;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup group;
     private javax.swing.JButton jButton1;

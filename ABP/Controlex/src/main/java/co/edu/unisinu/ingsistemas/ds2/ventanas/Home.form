@@ -31,7 +31,7 @@
     <Container class="javax.swing.JPanel" name="jpNavegacion">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="36" green="19" red="1" type="rgb"/>
+          <Color blue="4d" green="29" red="29" type="rgb"/>
         </Property>
       </Properties>
       <Constraints>
@@ -47,13 +47,16 @@
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="36" green="19" red="1" type="rgb"/>
+              <Color blue="8d" green="d6" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="URW Bookman" size="13" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f" green="d9" red="f8" type="rgb"/>
+              <Color blue="4d" green="29" red="29" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/img/cerrarsesion.png"/>
+              <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/icons/cerrarsesion.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Salir"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -86,7 +89,7 @@
         <Container class="javax.swing.JPanel" name="jpHome">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="36" green="19" red="1" type="rgb"/>
+              <Color blue="4d" green="29" red="29" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -102,10 +105,10 @@
             <Component class="javax.swing.JLabel" name="jlBienvenido">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="DejaVu Math TeX Gyre" size="48" style="3"/>
+                  <Font name="URW Bookman" size="48" style="3"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f" green="d9" red="f8" type="rgb"/>
+                  <Color blue="8d" green="d6" red="ff" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Bienvenido"/>
               </Properties>
@@ -115,29 +118,13 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JLabel" name="jlMensaje">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="DejaVu Math TeX Gyre" size="18" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f" green="d9" red="f8" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="$mensaje"/>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="170" y="180" width="300" height="30"/>
-                </Constraint>
-              </Constraints>
-            </Component>
             <Component class="javax.swing.JButton" name="jButton1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="36" green="19" red="1" type="rgb"/>
+                  <Color blue="4d" green="29" red="29" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/img/practica.png"/>
+                  <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/icons/practica.png"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -152,13 +139,29 @@
                 </Constraint>
               </Constraints>
             </Component>
+            <Component class="javax.swing.JLabel" name="jlMensaje">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="URW Bookman" size="18" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="8d" green="d6" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="$mensaje"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="170" y="180" width="300" height="30"/>
+                </Constraint>
+              </Constraints>
+            </Component>
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="36" green="19" red="1" type="rgb"/>
+                  <Color blue="4d" green="29" red="29" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/img/calificaciones.png"/>
+                  <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/icons/calificaciones.png"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -176,10 +179,10 @@
             <Component class="javax.swing.JButton" name="jButton3">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="36" green="19" red="1" type="rgb"/>
+                  <Color blue="4d" green="29" red="29" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/img/examen.png"/>
+                  <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/icons/examen.png"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -197,10 +200,10 @@
             <Component class="javax.swing.JLabel" name="jlBtn3">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="DejaVu Math TeX Gyre" size="14" style="1"/>
+                  <Font name="URW Bookman" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f" green="d9" red="f8" type="rgb"/>
+                  <Color blue="8d" green="d6" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="$Btn1"/>
@@ -214,10 +217,10 @@
             <Component class="javax.swing.JLabel" name="jlBtn1">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="DejaVu Math TeX Gyre" size="14" style="1"/>
+                  <Font name="URW Bookman" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f" green="d9" red="f8" type="rgb"/>
+                  <Color blue="8d" green="d6" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="$Btn1"/>
@@ -231,10 +234,10 @@
             <Component class="javax.swing.JLabel" name="jlBtn2">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="DejaVu Math TeX Gyre" size="14" style="1"/>
+                  <Font name="URW Bookman" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f" green="d9" red="f8" type="rgb"/>
+                  <Color blue="8d" green="d6" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Notas"/>
@@ -248,7 +251,7 @@
             <Container class="javax.swing.JPanel" name="jPanel2">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f" green="d9" red="f8" type="rgb"/>
+                  <Color blue="8d" green="d6" red="ff" type="rgb"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -271,10 +274,10 @@
                 <Component class="javax.swing.JLabel" name="jlReloj">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="DejaVu Math TeX Gyre" size="13" style="3"/>
+                      <Font name="URW Bookman" size="13" style="1"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="36" green="19" red="1" type="rgb"/>
+                      <Color blue="4d" green="29" red="29" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="Reloj"/>
@@ -290,7 +293,7 @@
             <Container class="javax.swing.JPanel" name="jPanel3">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f" green="d9" red="f8" type="rgb"/>
+                  <Color blue="8d" green="d6" red="ff" type="rgb"/>
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -313,10 +316,10 @@
                 <Component class="javax.swing.JLabel" name="jlFecha">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="DejaVu Math TeX Gyre" size="14" style="1"/>
+                      <Font name="URW Bookman" size="14" style="1"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="36" green="19" red="1" type="rgb"/>
+                      <Color blue="4d" green="29" red="29" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="fecha"/>

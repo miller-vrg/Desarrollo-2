@@ -29,6 +29,7 @@ public class Notas extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(1, 25, 54));
 
+        jTable1.setBackground(new java.awt.Color(255, 51, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},

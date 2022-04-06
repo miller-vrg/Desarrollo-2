@@ -10,7 +10,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-      <Color blue="36" green="19" red="1" type="rgb"/>
+      <Color blue="4d" green="29" red="29" type="rgb"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -33,10 +33,10 @@
     <Component class="javax.swing.JLabel" name="jlEncabezado">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="DejaVu Math TeX Gyre" size="24" style="3"/>
+          <Font name="URW Bookman" size="24" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f" green="d9" red="f8" type="rgb"/>
+          <Color blue="8d" green="d6" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="&amp;tipo"/>
@@ -50,10 +50,10 @@
     <Component class="javax.swing.JLabel" name="jlFecha">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="DejaVu Math TeX Gyre" size="13" style="3"/>
+          <Font name="URW Bookman" size="13" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f" green="d9" red="f8" type="rgb"/>
+          <Color blue="8d" green="d6" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="fecha"/>
       </Properties>
@@ -66,10 +66,10 @@
     <Component class="javax.swing.JLabel" name="jlTiempo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="DejaVu Math TeX Gyre" size="13" style="3"/>
+          <Font name="URW Bookman" size="13" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f" green="d9" red="f8" type="rgb"/>
+          <Color blue="8d" green="d6" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Tiempo"/>
       </Properties>
@@ -82,10 +82,10 @@
     <Component class="javax.swing.JSeparator" name="jSeparator1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f" green="d9" red="f8" type="rgb"/>
+          <Color blue="8d" green="d6" red="ff" type="rgb"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f" green="d9" red="f8" type="rgb"/>
+          <Color blue="8d" green="d6" red="ff" type="rgb"/>
         </Property>
       </Properties>
       <Constraints>
@@ -99,7 +99,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder>
-              <Color PropertyName="color" blue="f" green="d9" red="f8" type="rgb"/>
+              <Color PropertyName="color" blue="8d" green="d6" red="ff" type="rgb"/>
             </LineBorder>
           </Border>
         </Property>
@@ -115,7 +115,7 @@
         <Container class="javax.swing.JPanel" name="jpContenedor">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="36" green="19" red="1" type="rgb"/>
+              <Color blue="4d" green="29" red="29" type="rgb"/>
             </Property>
           </Properties>
 
@@ -126,13 +126,16 @@
     <Component class="javax.swing.JButton" name="jbtnEnviar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="36" green="19" red="1" type="rgb"/>
+          <Color blue="8d" green="d6" red="ff" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="URW Bookman" size="13" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f" green="d9" red="f8" type="rgb"/>
+          <Color blue="4d" green="29" red="29" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/img/enviar.png"/>
+          <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/icons/enviar.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Enviar"/>
         <Property name="hideActionText" type="boolean" value="true"/>

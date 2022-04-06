@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.mycompany_Controlex_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>co.edu.unisinu.ingsistemas.ds2.datos.Respuestas</class>
+    <class>co.edu.unisinu.ingsistemas.ds2.datos.Opciones</class>
+    <class>co.edu.unisinu.ingsistemas.ds2.datos.Examenes</class>
+    <class>co.edu.unisinu.ingsistemas.ds2.datos.Preguntas</class>
+    <class>co.edu.unisinu.ingsistemas.ds2.datos.Estudiantes</class>
+    <class>co.edu.unisinu.ingsistemas.ds2.datos.Realizaciones</class>
+    <class>co.edu.unisinu.ingsistemas.ds2.datos.ListadoNotas</class>
+    <class>co.edu.unisinu.ingsistemas.ds2.datos.Docentes</class>
+    <class>co.edu.unisinu.ingsistemas.ds2.datos.Pruebas</class>
+    <class>co.edu.unisinu.ingsistemas.ds2.datos.Creaciones</class>
+    <class>co.edu.unisinu.ingsistemas.ds2.datos.Practicas</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/registros_abp?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+    </properties>
+  </persistence-unit>
+</persistence>

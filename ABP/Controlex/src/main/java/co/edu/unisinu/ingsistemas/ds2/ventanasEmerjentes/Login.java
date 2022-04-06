@@ -1,12 +1,21 @@
 package co.edu.unisinu.ingsistemas.ds2.ventanasEmerjentes;
 
+import co.edu.unisinu.ingsistemas.ds2.conector.Conector;
 import co.edu.unisinu.ingsistemas.ds2.ventanas.Home;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -29,8 +38,10 @@ public class Login extends javax.swing.JDialog implements ItemListener{
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        ImageIcon img = new ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/img/login.png"));
+        jlImg.setLocation(0, 0);
+        jlImg.setIcon(img);
         seleccion = "Alumno";
-        jcTipo.addItemListener(this);
     }
 
     public Login() {
@@ -43,75 +54,97 @@ public class Login extends javax.swing.JDialog implements ItemListener{
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        checkcontra = new javax.swing.JCheckBox();
         jpPassword = new javax.swing.JPasswordField();
         jtUsuario = new javax.swing.JTextField();
         bntLogin = new javax.swing.JButton();
-        jcTipo = new javax.swing.JComboBox<>();
-        checkcontra = new javax.swing.JCheckBox();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jlImg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(48, 49, 88));
         setModal(true);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(1, 25, 54));
+        jPanel1.setBackground(new java.awt.Color(41, 41, 77));
         jPanel1.setMaximumSize(new java.awt.Dimension(415, 490));
         jPanel1.setMinimumSize(new java.awt.Dimension(415, 490));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/img/usuario.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, -1, -1));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 214, 141), 2));
+        jPanel2.setLayout(null);
 
-        jpPassword.setColumns(20);
-        jpPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248, 217, 15)));
-        jpPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jpPasswordActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jpPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 220, 20));
-
-        jtUsuario.setColumns(20);
-        jtUsuario.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jtUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248, 217, 15)));
-        jtUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtUsuarioActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 220, 20));
-
-        bntLogin.setBackground(new java.awt.Color(248, 217, 15));
-        bntLogin.setText("Iniciar");
-        bntLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntLoginActionPerformed(evt);
-            }
-        });
-        jPanel1.add(bntLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 90, -1));
-
-        jcTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alumno", "Docente" }));
-        jPanel1.add(jcTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 220, -1));
-
-        checkcontra.setForeground(new java.awt.Color(248, 217, 15));
+        checkcontra.setFont(new java.awt.Font("URW Gothic", 1, 14)); // NOI18N
         checkcontra.setText("ver");
         checkcontra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkcontraActionPerformed(evt);
             }
         });
-        jPanel1.add(checkcontra, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, -1, -1));
+        jPanel2.add(checkcontra);
+        checkcontra.setBounds(310, 200, 44, 22);
+
+        jpPassword.setColumns(20);
+        jpPassword.setFont(new java.awt.Font("URW Gothic", 0, 14)); // NOI18N
+        jpPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 214, 141), 2));
+        jpPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jpPasswordActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jpPassword);
+        jpPassword.setBounds(310, 160, 230, 30);
+
+        jtUsuario.setColumns(20);
+        jtUsuario.setFont(new java.awt.Font("URW Gothic", 0, 14)); // NOI18N
+        jtUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 214, 141), 2));
+        jtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtUsuarioActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jtUsuario);
+        jtUsuario.setBounds(310, 70, 230, 30);
+
+        bntLogin.setBackground(new java.awt.Color(255, 214, 141));
+        bntLogin.setFont(new java.awt.Font("URW Gothic", 1, 14)); // NOI18N
+        bntLogin.setText("Iniciar");
+        bntLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntLoginActionPerformed(evt);
+            }
+        });
+        jPanel2.add(bntLogin);
+        bntLogin.setBounds(310, 253, 230, 30);
+
+        jLabel2.setFont(new java.awt.Font("URW Gothic", 1, 14)); // NOI18N
+        jLabel2.setText("Contraseña");
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(310, 130, 77, 18);
+
+        jLabel3.setFont(new java.awt.Font("URW Gothic", 1, 14)); // NOI18N
+        jLabel3.setText("Usuario");
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(310, 40, 48, 18);
+
+        jlImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/img/login.png"))); // NOI18N
+        jPanel2.add(jlImg);
+        jlImg.setBounds(0, 0, 270, 330);
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 580, 330));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
         );
 
         pack();
@@ -165,52 +198,103 @@ public class Login extends javax.swing.JDialog implements ItemListener{
 
         usuario = jtUsuario.getText();
         password = new String(jpPassword.getPassword());
-
+  
+        Conector cn = null;
+        Connection conect = null;
+        PreparedStatement prepared = null ;
+        ResultSet resul = null;
+        
         try {
+            System.out.println("180 ");
+            cn = new Conector();System.out.println("181 ");
+            conect = cn.getDriver();System.out.println("182 ");
+            prepared = conect.prepareStatement( "SELECT * FROM estudiantes");System.out.println("183 ");
+            resul = prepared.executeQuery();System.out.println("184 ");
 
-            File arch = new File("json/usuarios/usuarios.json");
-
-            Object ob = new JSONParser().parse(new FileReader(arch));
-            JSONObject js = (JSONObject) ob;
-
-            HashMap<String,String> p = (HashMap<String, String>) (Map) js.get("87223");
-
-            if ((usuario).equals(p.get("matricula")) && (password).equals(p.get("password"))) {
-
-                JOptionPane.showMessageDialog(null, "Inicio exitoso");
-                //setVisible(false);
-               dispose();
-                
-                if (("Alumno").equals(seleccion)) {
-
-                    Home h = new Home("Alumno: " + p.get("name"), "Practica", "Examen");
-
-                } else {
-
-                    Home h = new Home("Docente: " + p.get("name"), "Crear Practica", "Craer Examen");
+            System.out.println("188 ");
+            boolean veriUser = false, veriPassword = false;
+            String tipo = "Alumno";
+            String name = "";
+            
+            while(resul.next()){
+            System.out.println("192 " + tipo);
+                if( veriUser == false ){System.out.println("193 ");
+                    veriUser = (resul.getInt("matricula") == Integer.parseInt(usuario));System.out.println("194 ");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuario o contraseña no valido", "Error!", JOptionPane.WARNING_MESSAGE);
+                if( veriPassword == false ){System.out.println("196 ");
+                    veriPassword = ((resul.getString("password")).equals(password));System.out.println("197 ");
+                }
+                 if( veriUser == true && veriPassword == true){System.out.println("199 ");
+                 
+                 name = resul.getString("name") + " "
+                         + resul.getString("apellidos");
+                 tipo += ": ";
+                 System.out.println("205" + tipo);
+                 JOptionPane.showMessageDialog(null, "Inicio exitoso");
+                 break;
+                 }
+            }
+            
+            if( veriUser == false && veriPassword == false){
+            prepared = conect.prepareStatement( "SELECT * FROM docentes");
+            resul = prepared.executeQuery();
+            while(resul.next()){
+                if( veriUser == false ){
+                    veriUser = ((""+resul.getInt("id")).equals(usuario));
+                }
+                if( veriPassword == false ){
+                    veriPassword = (resul.getString("password") == password);
+                }
+                 if( veriUser == true && veriPassword == true){
+                 
+                 name = resul.getString("name") + " "
+                         + " " + resul.getString("apellidos");
+                 tipo = "Docente: ";
+                 JOptionPane.showMessageDialog(null, "Inicio exitoso");
+                 break;
+                 }
+            }
+            }
+            if (veriUser == true && veriPassword == true) {
+                dispose();
+                if( ("Alumno: ").equals(tipo) ){
+                new Home(tipo + name, "Practica", "Examen",Integer.parseInt(usuario));
+                }else{
+                dispose();
+                new Home(tipo + name, "Crear practica", "Crear examen",Integer.parseInt(usuario));
+                }
+            }
+            if (veriUser == false && veriPassword == true) {
+                JOptionPane.showMessageDialog(null, "El usuario no existe");
+            }
+            if (veriPassword == false && veriUser == true) {
+                JOptionPane.showMessageDialog(null, "Contraseña invalida", "ERROR!!", JOptionPane.ERROR_MESSAGE);
             }
 
-        } catch (Exception e) {
 
+        } catch (SQLException e) {
+            System.out.print(e);
             JOptionPane.showMessageDialog(null, "Algo salio mal", "Error!", JOptionPane.WARNING_MESSAGE);
 
+        }finally{
+        cn.close(conect,resul,prepared);
+        
         }
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntLogin;
     private javax.swing.JCheckBox checkcontra;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox<String> jcTipo;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jlImg;
     private javax.swing.JPasswordField jpPassword;
     private javax.swing.JTextField jtUsuario;
     // End of variables declaration//GEN-END:variables
 
-    private String Selecionado;
+
     private String password;
     private String usuario;
     
@@ -225,16 +309,15 @@ public class Login extends javax.swing.JDialog implements ItemListener{
     public String getUsuario(){
     return usuario;}
 
- public void itemStateChanged(ItemEvent e) {
+ /*public void itemStateChanged(ItemEvent e) {
         if (e.getSource()==jcTipo) {
-          seleccion =(String)jcTipo.getSelectedItem();
-            
         }
         if(e.getSource()==jpPassword){
           password = (String) jpPassword.getSelectedText();
         }
         usuario = jtUsuario.getText();
     }
+    */
  
     /**
      * @return the jpPassword
@@ -242,6 +325,11 @@ public class Login extends javax.swing.JDialog implements ItemListener{
     public String getJpPassword() {
 
         return password;
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent ie) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

@@ -58,11 +58,11 @@ public class VentanaCrudUsuario extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         campoNombre = new javax.swing.JTextField();
         campoEmail = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        radioMasculino = new javax.swing.JRadioButton();
+        radioFemenino = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         areaDireccion = new javax.swing.JTextArea();
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        calendarioNacimiento = new org.jdesktop.swingx.JXDatePicker();
         campoPassword = new javax.swing.JPasswordField();
 
         jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos del usuario"));
@@ -135,11 +135,11 @@ public class VentanaCrudUsuario extends javax.swing.JDialog {
         jPanel1.add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 220, -1));
         jPanel1.add(campoEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 220, -1));
 
-        jRadioButton1.setText("FEMENINO");
-        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, -1, -1));
+        radioMasculino.setText("MASCULINO");
+        jPanel1.add(radioMasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, -1, -1));
 
-        jRadioButton2.setText("MASCULINO");
-        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, -1, -1));
+        radioFemenino.setText("FEMENINO");
+        jPanel1.add(radioFemenino, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, -1, -1));
 
         areaDireccion.setColumns(20);
         areaDireccion.setRows(5);
@@ -147,7 +147,7 @@ public class VentanaCrudUsuario extends javax.swing.JDialog {
         jScrollPane1.setViewportView(areaDireccion);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 350, -1));
-        jPanel1.add(jXDatePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 220, -1));
+        jPanel1.add(calendarioNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 220, -1));
 
         campoPassword.setText("jPasswordField1");
         jPanel1.add(campoPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 220, -1));
@@ -213,6 +213,7 @@ public class VentanaCrudUsuario extends javax.swing.JDialog {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
+    private org.jdesktop.swingx.JXDatePicker calendarioNacimiento;
     private javax.swing.JTextField campoApellido;
     private javax.swing.JTextField campoClave;
     private javax.swing.JTextField campoEmail;
@@ -232,9 +233,8 @@ public class VentanaCrudUsuario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
+    private javax.swing.JRadioButton radioFemenino;
+    private javax.swing.JRadioButton radioMasculino;
     // End of variables declaration//GEN-END:variables
 }

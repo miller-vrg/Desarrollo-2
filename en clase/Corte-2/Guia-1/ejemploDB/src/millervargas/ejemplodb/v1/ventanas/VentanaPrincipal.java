@@ -1,17 +1,6 @@
-/**
- * Esta clase la hemos definido para que herede el docigo de la clase
- * jframe de java, la cual ya viene programada para que se comporte como una 
- * Ventana normal del sistema Operativo. Es decir, una ventana  que tiene:
- * Barra de titulo
- * Border
- * Botones para Minimizar , Maximizar, Restaurar y Cerrar
- * Incono en la esquina parte seperior
- * un papel de fondo en el que podemos colocar otros componentes
-* Una barra de menu para agregarle menus, y a estos poder agregarles opciones
-* al ser una ventana normal del S.O, esta tambien podemos:
-* Abrirla, Ocultarla de una lado a otrp, estiarla, Maximizarla, Moverla y Arrastrarla de un lado a otro, estiarla, escojerla,
-* Cambiarle el color e imagen de fondo, colocarle un icono identificativo, etc
- * 
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package millervargas.ejemplodb.v1.ventanas;
 
@@ -19,7 +8,7 @@ package millervargas.ejemplodb.v1.ventanas;
  *
  * @author gasler
  */
-public class VentanaPrincipal extends javax.swing.JPanel {
+public class VentanaPrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaPrincipal
@@ -37,19 +26,234 @@ public class VentanaPrincipal extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        jMenuBar1 = new javax.swing.JMenuBar();
+        userMenu = new javax.swing.JMenu();
+        iniciarSesion = new javax.swing.JMenuItem();
+        jSeparator9 = new javax.swing.JPopupMenu.Separator();
+        agregarUser = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        burcarUser = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        modificarUser = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        eliminarUser = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        reportesUsuario = new javax.swing.JMenu();
+        reportePorNombre = new javax.swing.JMenuItem();
+        eportePorApellido = new javax.swing.JMenuItem();
+        eportePorGenero = new javax.swing.JMenuItem();
+        gastosMenu = new javax.swing.JMenu();
+        agregarGastos = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        buscarGastos = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        modificargastos = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        eliminarGastos = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
+        jMenu1 = new javax.swing.JMenu();
+        eportePorCategoria = new javax.swing.JMenuItem();
+        eportePorPrecio = new javax.swing.JMenuItem();
+        eportePorFecha = new javax.swing.JMenuItem();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        userMenu.setText("Usuarios");
+
+        iniciarSesion.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        iniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/millervargas/ejemplodb/v1/ventanas/icons/004-bloquear.png"))); // NOI18N
+        iniciarSesion.setText("Iniciar sesion");
+        userMenu.add(iniciarSesion);
+        userMenu.add(jSeparator9);
+
+        agregarUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/millervargas/ejemplodb/v1/ventanas/icons/001-agregar-usuario.png"))); // NOI18N
+        agregarUser.setText("Agregar");
+        userMenu.add(agregarUser);
+        userMenu.add(jSeparator1);
+
+        burcarUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/millervargas/ejemplodb/v1/ventanas/icons/003-buscar.png"))); // NOI18N
+        burcarUser.setText("Buscar");
+        burcarUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                burcarUserActionPerformed(evt);
+            }
+        });
+        userMenu.add(burcarUser);
+        userMenu.add(jSeparator2);
+
+        modificarUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/millervargas/ejemplodb/v1/ventanas/icons/005-usuario.png"))); // NOI18N
+        modificarUser.setText("Modificar");
+        userMenu.add(modificarUser);
+        userMenu.add(jSeparator3);
+
+        eliminarUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/millervargas/ejemplodb/v1/ventanas/icons/002-hombre.png"))); // NOI18N
+        eliminarUser.setText("Eliminar");
+        userMenu.add(eliminarUser);
+        userMenu.add(jSeparator7);
+
+        reportesUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/millervargas/ejemplodb/v1/ventanas/icons/006-cliente.png"))); // NOI18N
+        reportesUsuario.setText("Reportes");
+
+        reportePorNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/millervargas/ejemplodb/v1/ventanas/icons/006-cliente.png"))); // NOI18N
+        reportePorNombre.setText("Por nombre");
+        reportesUsuario.add(reportePorNombre);
+
+        eportePorApellido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/millervargas/ejemplodb/v1/ventanas/icons/006-cliente.png"))); // NOI18N
+        eportePorApellido.setText("Por apellido");
+        eportePorApellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eportePorApellidoActionPerformed(evt);
+            }
+        });
+        reportesUsuario.add(eportePorApellido);
+
+        eportePorGenero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/millervargas/ejemplodb/v1/ventanas/icons/007-lista-de-verificacion.png"))); // NOI18N
+        eportePorGenero.setText("Por genero");
+        reportesUsuario.add(eportePorGenero);
+
+        userMenu.add(reportesUsuario);
+
+        jMenuBar1.add(userMenu);
+
+        gastosMenu.setText("Gastos");
+
+        agregarGastos.setText("Agregar");
+        gastosMenu.add(agregarGastos);
+        gastosMenu.add(jSeparator4);
+
+        buscarGastos.setText("Buscar");
+        gastosMenu.add(buscarGastos);
+        gastosMenu.add(jSeparator5);
+
+        modificargastos.setText("Modificar");
+        gastosMenu.add(modificargastos);
+        gastosMenu.add(jSeparator6);
+
+        eliminarGastos.setText("Eliminar");
+        eliminarGastos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarGastosActionPerformed(evt);
+            }
+        });
+        gastosMenu.add(eliminarGastos);
+        gastosMenu.add(jSeparator8);
+
+        jMenu1.setText("jMenu1");
+
+        eportePorCategoria.setText("Por categoria");
+        eportePorCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eportePorCategoriaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(eportePorCategoria);
+
+        eportePorPrecio.setText("Por precio");
+        jMenu1.add(eportePorPrecio);
+
+        eportePorFecha.setText("Por fecha");
+        jMenu1.add(eportePorFecha);
+
+        gastosMenu.add(jMenu1);
+
+        jMenuBar1.add(gastosMenu);
+
+        setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 276, Short.MAX_VALUE)
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void burcarUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_burcarUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_burcarUserActionPerformed
+
+    private void eliminarGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarGastosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eliminarGastosActionPerformed
+
+    private void eportePorApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eportePorApellidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eportePorApellidoActionPerformed
+
+    private void eportePorCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eportePorCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eportePorCategoriaActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new VentanaPrincipal().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem agregarGastos;
+    private javax.swing.JMenuItem agregarUser;
+    private javax.swing.JMenuItem burcarUser;
+    private javax.swing.JMenuItem buscarGastos;
+    private javax.swing.JMenuItem eliminarGastos;
+    private javax.swing.JMenuItem eliminarUser;
+    private javax.swing.JMenuItem eportePorApellido;
+    private javax.swing.JMenuItem eportePorCategoria;
+    private javax.swing.JMenuItem eportePorFecha;
+    private javax.swing.JMenuItem eportePorGenero;
+    private javax.swing.JMenuItem eportePorPrecio;
+    private javax.swing.JMenu gastosMenu;
+    private javax.swing.JMenuItem iniciarSesion;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
+    private javax.swing.JPopupMenu.Separator jSeparator9;
+    private javax.swing.JMenuItem modificarUser;
+    private javax.swing.JMenuItem modificargastos;
+    private javax.swing.JMenuItem reportePorNombre;
+    private javax.swing.JMenu reportesUsuario;
+    private javax.swing.JMenu userMenu;
     // End of variables declaration//GEN-END:variables
 }
