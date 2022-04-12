@@ -30,6 +30,12 @@ public class Login extends javax.swing.JDialog implements ItemListener{
 
     private boolean veri = true;
     private String seleccion;
+    private String advertencia;
+    private ImageIcon iconAdvertencia;
+    private String correcto;
+    private ImageIcon iconCorrecto;
+    private String error;
+    private ImageIcon iconError;
     
     /**
      * Creates new form Login
@@ -38,6 +44,17 @@ public class Login extends javax.swing.JDialog implements ItemListener{
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+                
+        advertencia = "/co/edu/unisinu/ingsistemas/ds2/icons/advertencia.png";
+        iconAdvertencia = new ImageIcon(getClass().getResource(advertencia));
+        
+        correcto = "/co/edu/unisinu/ingsistemas/ds2/icons/correcto.png";
+        iconCorrecto = new ImageIcon(getClass().getResource(correcto));
+        
+        error = "/co/edu/unisinu/ingsistemas/ds2/icons/error.png";
+        iconError = new ImageIcon(getClass().getResource(error));
+        
         ImageIcon img = new ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/img/login.png"));
         jlImg.setLocation(0, 0);
         jlImg.setIcon(img);
@@ -79,6 +96,8 @@ public class Login extends javax.swing.JDialog implements ItemListener{
 
         checkcontra.setFont(new java.awt.Font("URW Gothic", 1, 14)); // NOI18N
         checkcontra.setText("ver");
+        checkcontra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        checkcontra.setFocusable(false);
         checkcontra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkcontraActionPerformed(evt);
@@ -193,7 +212,6 @@ public class Login extends javax.swing.JDialog implements ItemListener{
             }
         });
     }
-
     public void veri() {
 
         usuario = jtUsuario.getText();
@@ -230,7 +248,7 @@ public class Login extends javax.swing.JDialog implements ItemListener{
                          + resul.getString("apellidos");
                  tipo += ": ";
                  System.out.println("205" + tipo);
-                 JOptionPane.showMessageDialog(null, "Inicio exitoso");
+                 JOptionPane.showMessageDialog(null, "Inicio exitoso","Exito",0,iconCorrecto);
                  break;
                  }
             }
@@ -240,17 +258,19 @@ public class Login extends javax.swing.JDialog implements ItemListener{
             resul = prepared.executeQuery();
             while(resul.next()){
                 if( veriUser == false ){
-                    veriUser = ((""+resul.getInt("id")).equals(usuario));
+                    veriUser = ((""+resul.getInt("id")).equalsIgnoreCase(usuario));
+                    System.out.println("262 id = " + resul.getInt("id") + " ");
                 }
                 if( veriPassword == false ){
-                    veriPassword = (resul.getString("password") == password);
+                    veriPassword = ((resul.getString("password")).equals(password));
+                    System.out.println("266 pass = " + resul.getString("password") + " ");
                 }
                  if( veriUser == true && veriPassword == true){
                  
                  name = resul.getString("name") + " "
                          + " " + resul.getString("apellidos");
                  tipo = "Docente: ";
-                 JOptionPane.showMessageDialog(null, "Inicio exitoso");
+                 JOptionPane.showMessageDialog(null, "Inicio exitoso","Exito",0,iconCorrecto);
                  break;
                  }
             }
@@ -258,23 +278,23 @@ public class Login extends javax.swing.JDialog implements ItemListener{
             if (veriUser == true && veriPassword == true) {
                 dispose();
                 if( ("Alumno: ").equals(tipo) ){
-                new Home(tipo + name, "Practica", "Examen",Integer.parseInt(usuario));
+                new Home(tipo + name, "Practicas", "Examenes",Integer.parseInt(usuario));
                 }else{
                 dispose();
                 new Home(tipo + name, "Crear practica", "Crear examen",Integer.parseInt(usuario));
                 }
             }
             if (veriUser == false && veriPassword == true) {
-                JOptionPane.showMessageDialog(null, "El usuario no existe");
+                JOptionPane.showMessageDialog(null, "El usuario no existe","Advertencia!!!",JOptionPane.ERROR_MESSAGE,iconAdvertencia);
             }
             if (veriPassword == false && veriUser == true) {
-                JOptionPane.showMessageDialog(null, "Contraseña invalida", "ERROR!!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Contraseña invalida", "ERROR!!", JOptionPane.ERROR_MESSAGE,iconError);
             }
 
 
         } catch (SQLException e) {
             System.out.print(e);
-            JOptionPane.showMessageDialog(null, "Algo salio mal", "Error!", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Fue imposible conectarse con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE,iconError);
 
         }finally{
         cn.close(conect,resul,prepared);

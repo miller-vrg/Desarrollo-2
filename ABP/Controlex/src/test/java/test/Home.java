@@ -27,10 +27,10 @@ public class Home extends JFrame{
     final Color fondo = new Color(1,25,54);
     final Color colorFuente = new Color(248,217,15);
     
-    final Icon salir = new ImageIcon(getClass().getResource("co/edu/unisinu/ingsistemas/ds2/img/cerrarsesion.png"));
-    final Icon practica = new ImageIcon(getClass().getResource("co/edu/unisinu/ingsistemas/ds2/img/practica.png"));
-    final Icon examen = new ImageIcon(getClass().getResource("co/edu/unisinu/ingsistemas/ds2/img/examen.png"));
-    final Icon notas = new ImageIcon(getClass().getResource("co/edu/unisinu/ingsistemas/ds2/img/calificaciones.png"));
+    final Icon salir = new ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/icons/cerrarsesion.png"));
+    final Icon practica = new ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/icons/practica.png"));
+    final Icon examen = new ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/icons/examen.png"));
+    final Icon notas = new ImageIcon(getClass().getResource("/co/edu/unisinu/ingsistemas/ds2/icons/calificaciones.png"));
     
     jlBienvenida  = new JLabel("Bienvenido");
     jlBienvenida.setFont (new Font("Serif", Font.BOLD, 40));

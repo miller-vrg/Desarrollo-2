@@ -1,8 +1,10 @@
 package co.edu.unisinu.ingsistemas.ds2.ventanas;
 
 import co.edu.unisinu.ingsistemas.ds2.conector.Conector;
+import co.edu.unisinu.ingsistemas.ds2.procesos.Reloj;
 import co.edu.unisinu.ingsistemas.ds2.ventasAlumno.*;
 import co.edu.unisinu.ingsistemas.ds2.ventasDocente.ContenidoDocente;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,20 +31,42 @@ import org.json.simple.parser.JSONParser;
  * 
  */
 
-public class Contenedor extends javax.swing.JPanel {
+public class Contenedor extends javax.swing.JPanel implements Runnable{
 
     private final int usuario;
-
+    private Thread h1;
+    private int t;
+    private String name;
+    private final String advertencia;
+    private final ImageIcon iconAdvertencia;
+    private final String correcto;
+    private final ImageIcon iconCorrecto;
+    private final String error;
+    private final ImageIcon iconError;
     /**
      * Creates new form HomeAlumno
      */
-    public Contenedor(String encabezado,int usuario) {
+    
+    public Contenedor(String encabezado,int usuario,String name) {
         initComponents();
+        h1 = new Thread(this);
+        t = 1000;
+        nota = 0.0f;
+        advertencia = "/co/edu/unisinu/ingsistemas/ds2/icons/advertencia.png";
+        iconAdvertencia = new ImageIcon(getClass().getResource(advertencia));
+        
+        correcto = "/co/edu/unisinu/ingsistemas/ds2/icons/correcto.png";
+        iconCorrecto = new ImageIcon(getClass().getResource(correcto));
+        
+        error = "/co/edu/unisinu/ingsistemas/ds2/icons/error.png";
+        iconError = new ImageIcon(getClass().getResource(error));
+        
+        this.name = name;
         this.usuario = usuario;
         String fecha = new SimpleDateFormat("yy/MM/dd").format(Calendar.getInstance().getTime());
         jlFecha.setText(fecha);
         jlEncabezado.setText(encabezado);
-        
+        this.name = name;
         jpContenedor.removeAll();
         jpContenedor.updateUI();
         
@@ -53,15 +77,24 @@ public class Contenedor extends javax.swing.JPanel {
         PreparedStatement prepared = null;
         ResultSet resul = null;
                 
-        if( ("Practica").equals(jlEncabezado.getText()) ){
-                
+        if( ("Practicas").equals(jlEncabezado.getText()) ){
+               
             try {
                 objCn = new Conector();
                 cn = objCn.getDriver();
+                
+                prepared = cn.prepareStatement("SELECT id FROM creaciones "
+                                             + "WHERE name = '" + this.name + "';");
+                
+                 resul = prepared.executeQuery();
+                 int id = 0;
+                 while(resul.next()){
+                id = resul.getInt("id");
+                 }
+                 System.out.println(id);
+                 
                prepared = cn.prepareStatement("SELECT * FROM datos "
-                                             + "JOIN creaciones  ON "
-                                             + "datos.creaciones_id = creaciones.id "
-                                             + "AND creaciones.tipo='Practicas';");
+                                             + "WHERE datos.creaciones_id = " + id + ";");
                resul = prepared.executeQuery();
                 int con =0;
                 while (resul.next()) {
@@ -73,10 +106,11 @@ public class Contenedor extends javax.swing.JPanel {
                             (String) resul.getString("op_c")
                     ));
                     con++;
+                    creacionesId = resul.getInt("creaciones_id");
 
                 }
-                
-               
+                 h1.start();
+                run();
               
               this.valor = 5.0 / con;
               System.out.println("Valor: " + valor);
@@ -84,15 +118,15 @@ public class Contenedor extends javax.swing.JPanel {
                // JOptionPane.showMessageDialog(null,"Se abrio con exito la practica");
             } catch (Exception e) {
                 System.out.print(e);
-                JOptionPane.showMessageDialog(null,"Error al optener datos de la practica en la DB","ERROR!!!",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Error al optener datos de la practica en la DB","ERROR!!!",JOptionPane.ERROR_MESSAGE,iconError);
             }finally{
             objCn.close(cn, resul, prepared);
             }
 
          
        
-        } else if (("Examen").equals(jlEncabezado.getText())) {
-
+        } else if (("Examenes").equals(jlEncabezado.getText())) {
+         
             try {
                 objCn = new Conector();
                 cn = objCn.getDriver();
@@ -111,10 +145,11 @@ public class Contenedor extends javax.swing.JPanel {
                             (String) resul.getString("op_c")
                     ));
                     con++;
-
+                    creacionesId = resul.getInt("creaciones_id");
                 }
                 
-               
+                h1.start();
+                run();
               
               this.valor = 5.0 / con;
               System.out.println("Valor: " + valor);
@@ -122,25 +157,31 @@ public class Contenedor extends javax.swing.JPanel {
                // JOptionPane.showMessageDialog(null,"Se abrio con exito la practica");
             } catch (Exception e) {
                 System.out.print(e);
-                JOptionPane.showMessageDialog(null,"Error al optener datos de la practica en la DB","ERROR!!!",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Error al optener datos de la practica en la DB","ERROR!!!",JOptionPane.ERROR_MESSAGE,iconError);
             }finally{
             objCn.close(cn, resul, prepared);
             }
 
-        }else if ( ("Creación de Examen").equals(jlEncabezado.getText())  ){
-                    jpContenedor.add(new ContenidoDocente("Crear Practica"));
+        }else if ( ("Crear examen").equals(jlEncabezado.getText())  ){
+            jlTiempo.setEnabled(false);
+                    jpContenedor.add(new ContenidoDocente("Crear examen",this.usuario));
 
+        } else if ( ("Crear practica").equals(jlEncabezado.getText())  ) {
+             jlTiempo.setEnabled(false);
+             jpContenedor.add(new ContenidoDocente("Crear practica",this.usuario));
         }else{
-                jpContenedor.add(new Notas());
-
+            
+            String tipo = name;
+            
+             System.out.println(tipo + " - " + name);
+        jlTiempo.setVisible(false);
+            jbtnEnviar.setVisible(false);
+            jpContenedor.setLocation(40, 60);
+            jpContenedor.add(new Notas(usuario,tipo));
+            
         }
     }
-
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -157,27 +198,31 @@ public class Contenedor extends javax.swing.JPanel {
         jLabel1.setText("jLabel1");
 
         setBackground(new java.awt.Color(41, 41, 77));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(null);
 
         jlEncabezado.setFont(new java.awt.Font("URW Bookman", 1, 24)); // NOI18N
         jlEncabezado.setForeground(new java.awt.Color(255, 214, 141));
         jlEncabezado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlEncabezado.setText("&tipo");
-        add(jlEncabezado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 490, -1));
+        add(jlEncabezado);
+        jlEncabezado.setBounds(90, 10, 330, 30);
 
         jlFecha.setFont(new java.awt.Font("URW Bookman", 1, 13)); // NOI18N
         jlFecha.setForeground(new java.awt.Color(255, 214, 141));
         jlFecha.setText("fecha");
-        add(jlFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, -1));
+        add(jlFecha);
+        jlFecha.setBounds(10, 10, 100, 17);
 
         jlTiempo.setFont(new java.awt.Font("URW Bookman", 1, 13)); // NOI18N
         jlTiempo.setForeground(new java.awt.Color(255, 214, 141));
         jlTiempo.setText("Tiempo");
-        add(jlTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 60, 80, -1));
+        add(jlTiempo);
+        jlTiempo.setBounds(440, 20, 80, 17);
 
         jSeparator1.setBackground(new java.awt.Color(255, 214, 141));
         jSeparator1.setForeground(new java.awt.Color(255, 214, 141));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 700, 10));
+        add(jSeparator1);
+        jSeparator1.setBounds(0, 40, 700, 10);
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 214, 141)));
 
@@ -185,7 +230,8 @@ public class Contenedor extends javax.swing.JPanel {
         jpContenedor.setLayout(new javax.swing.BoxLayout(jpContenedor, javax.swing.BoxLayout.LINE_AXIS));
         jScrollPane1.setViewportView(jpContenedor);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 550, 370));
+        add(jScrollPane1);
+        jScrollPane1.setBounds(50, 60, 550, 370);
 
         jbtnEnviar.setBackground(new java.awt.Color(255, 214, 141));
         jbtnEnviar.setFont(new java.awt.Font("URW Bookman", 1, 13)); // NOI18N
@@ -199,9 +245,53 @@ public class Contenedor extends javax.swing.JPanel {
                 jbtnEnviarActionPerformed(evt);
             }
         });
-        add(jbtnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, 110, -1));
+        add(jbtnEnviar);
+        jbtnEnviar.setBounds(530, 440, 110, 30);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    @Override
+    public void run() {
+        
+         Thread ct = Thread.currentThread();
+        String contador ;
+        
+        int minutos = 60;
+        int segundos = 60;
+        int hora = 0;
+       
+         while( ct == h1 ){
+        
+             segundos = ( segundos < 61 && minutos != 0)? segundos - 1: segundos ;
+             minutos = ( segundos == 0 && minutos > 0 )? minutos-1: minutos;
+             contador = "0" + hora + ":" + minutos + ":" + segundos;
+             contador = ( segundos%2 == 0 )?"0" + hora + " " + minutos + " " + segundos: contador;
+             segundos = ( segundos == 0 && minutos != 0)? 60: segundos ;
+             jlTiempo.setText(contador);
+             
+              if (minutos  < 10){
+             jlTiempo.setForeground(Color.red);
+             }
+             if(minutos == 9 && segundos == 60){
+              JOptionPane.showMessageDialog(null, "Queda menos de 10 minutos","Sin tiempo",JOptionPane.WARNING_MESSAGE,iconAdvertencia);
+             }
+             if(minutos < 1 && segundos < 1){
+                setT(0);
+                
+                calcularNota();
+                asignarNota();
+                eliminarArchivo();
+                break;
+             }
+          
+        try{
+        Thread.sleep(getT());
+        }catch( Exception e ){
+        JOptionPane.showMessageDialog(null,"Error al obtener hora","ERROR!",JOptionPane.ERROR_MESSAGE,iconError);
+        };   
+        
+    }
+    }
+    
     private void jbtnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEnviarActionPerformed
 
         calcularNota();
@@ -233,20 +323,20 @@ public class Contenedor extends javax.swing.JPanel {
                 cn = objCn.getDriver();
                 prepared = cn.prepareStatement("SELECT respuesta FROM " +
                                                 "datos JOIN creaciones ON " +
-                                                "creaciones.tipo ='Practicas' " +
+                                                "creaciones.tipo ='"+ jlEncabezado.getText() +"' " +
                                                 "AND datos.creaciones_id = creaciones.id;");
                 resul = prepared.executeQuery();
                 int con = 0;
                 while( resul.next() ){
                    con++;
-                nota += (resul.getString("respuesta").equalsIgnoreCase(respuestas[con]))? valor: 0;
+                nota += (resul.getString("respuesta").equalsIgnoreCase(respuestas[con]))? valor: 0.0f;
 
                 System.out.println(respuestas[con] + "-> nota: " + nota + " -> Valor: " + valor);
                 
                 }
                 
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null,"No se pudo calcular su resultados","ERROR!!!",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"No se pudo calcular su resultados","ERROR!!!",JOptionPane.ERROR_MESSAGE,iconError);
                System.out.println(ex);
             }finally{
             objCn.close(cn, resul, prepared);
@@ -254,15 +344,15 @@ public class Contenedor extends javax.swing.JPanel {
             
             JOptionPane.showMessageDialog(null,"Se guardaron con exito los resultados, puede revisar su nota en la seccion de notas");
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null,"No se pudo guardar los resultados","ERROR!!!",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"No se pudo guardar los resultados","ERROR!!!",JOptionPane.ERROR_MESSAGE,iconError);
             System.out.print(ex);
         }
     }
     private void asignarNota(){
-    llenarId();
-      Conector objCn = null;
-            Connection cn = null;
-            PreparedStatement prepared = null;
+        llenarId();
+        Conector objCn = null;
+        Connection cn = null;
+        PreparedStatement prepared = null;
             
             try {
                 objCn = new Conector();
@@ -274,9 +364,10 @@ public class Contenedor extends javax.swing.JPanel {
                 prepared.setInt(3, docentesId);
                 prepared.setInt(4, usuario);
                 prepared.executeUpdate();
-                JOptionPane.showMessageDialog(null,"Se guardo con exito su nota");
+                JOptionPane.showMessageDialog(null,"Se guardo con exito su nota","Exito",0,iconCorrecto);
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null,"No se pudo guardar su nota","ERROR!!!",JOptionPane.ERROR_MESSAGE);
+                
+                JOptionPane.showMessageDialog(null,"No se pudo guardar su nota","ERROR!!!",JOptionPane.ERROR_MESSAGE,iconError);
                System.out.println(ex);
             }finally{
             objCn.close(cn, prepared);
@@ -339,7 +430,7 @@ public class Contenedor extends javax.swing.JPanel {
 
     private float nota;
     private double valor;
-    private int creacionesId = 1;
+    private int creacionesId;
     private int docentesId;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -352,4 +443,20 @@ public class Contenedor extends javax.swing.JPanel {
     private javax.swing.JLabel jlTiempo;
     private javax.swing.JPanel jpContenedor;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the t
+     */
+    public int getT() {
+        return t;
+    }
+
+    /**
+     * @param t the t to set
+     */
+    public void setT(int t) {
+        this.t = t;
+    }
+
+
 }

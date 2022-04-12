@@ -2,18 +2,21 @@
 package co.edu.unisinu.ingsistemas.ds2.datos;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -24,36 +27,32 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Creaciones.findAll", query = "SELECT c FROM Creaciones c"),
     @NamedQuery(name = "Creaciones.findById", query = "SELECT c FROM Creaciones c WHERE c.id = :id"),
-    @NamedQuery(name = "Creaciones.findByTipo", query = "SELECT c FROM Creaciones c WHERE c.tipo = :tipo"),
-    @NamedQuery(name = "Creaciones.findByApertura", query = "SELECT c FROM Creaciones c WHERE c.apertura = :apertura"),
-    @NamedQuery(name = "Creaciones.findByColaboradores", query = "SELECT c FROM Creaciones c WHERE c.colaboradores = :colaboradores"),
-    @NamedQuery(name = "Creaciones.findByFechaCrecion", query = "SELECT c FROM Creaciones c WHERE c.fechaCrecion = :fechaCrecion")})
+    @NamedQuery(name = "Creaciones.findByName", query = "SELECT c FROM Creaciones c WHERE c.name = :name"),
+    @NamedQuery(name = "Creaciones.findByTipo", query = "SELECT c FROM Creaciones c WHERE c.tipo = :tipo")})
 public class Creaciones implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "tipo")
+    @Column(name = "name", nullable = false, length = 100)
+    private String name;
+    @Basic(optional = false)
+    @Column(name = "tipo", nullable = false, length = 20)
     private String tipo;
-    @Basic(optional = false)
-    @Column(name = "apertura")
-    @Temporal(TemporalType.DATE)
-    private Date apertura;
-    @Column(name = "colaboradores")
+    @Lob
+    @Column(name = "colaboradores", length = 65535)
     private String colaboradores;
-    @Basic(optional = false)
-    @Column(name = "fecha_crecion")
-    @Temporal(TemporalType.DATE)
-    private Date fechaCrecion;
-    @JoinColumn(name = "dni_docente", referencedColumnName = "dni")
-    @ManyToOne
-    private Docentes dniDocente;
-    @JoinColumn(name = "name_prueba", referencedColumnName = "name")
+    @JoinColumn(name = "docentes_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Pruebas namePrueba;
+    private Docentes docentesId;
+    @OneToMany(mappedBy = "creacionesId")
+    private Collection<Datos> datosCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "creacionesId")
+    private Collection<Registros> registrosCollection;
 
     public Creaciones() {
     }
@@ -62,11 +61,10 @@ public class Creaciones implements Serializable {
         this.id = id;
     }
 
-    public Creaciones(Integer id, String tipo, Date apertura, Date fechaCrecion) {
+    public Creaciones(Integer id, String name, String tipo) {
         this.id = id;
+        this.name = name;
         this.tipo = tipo;
-        this.apertura = apertura;
-        this.fechaCrecion = fechaCrecion;
     }
 
     public Integer getId() {
@@ -77,20 +75,20 @@ public class Creaciones implements Serializable {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getTipo() {
         return tipo;
     }
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public Date getApertura() {
-        return apertura;
-    }
-
-    public void setApertura(Date apertura) {
-        this.apertura = apertura;
     }
 
     public String getColaboradores() {
@@ -101,28 +99,28 @@ public class Creaciones implements Serializable {
         this.colaboradores = colaboradores;
     }
 
-    public Date getFechaCrecion() {
-        return fechaCrecion;
+    public Docentes getDocentesId() {
+        return docentesId;
     }
 
-    public void setFechaCrecion(Date fechaCrecion) {
-        this.fechaCrecion = fechaCrecion;
+    public void setDocentesId(Docentes docentesId) {
+        this.docentesId = docentesId;
     }
 
-    public Docentes getDniDocente() {
-        return dniDocente;
+    public Collection<Datos> getDatosCollection() {
+        return datosCollection;
     }
 
-    public void setDniDocente(Docentes dniDocente) {
-        this.dniDocente = dniDocente;
+    public void setDatosCollection(Collection<Datos> datosCollection) {
+        this.datosCollection = datosCollection;
     }
 
-    public Pruebas getNamePrueba() {
-        return namePrueba;
+    public Collection<Registros> getRegistrosCollection() {
+        return registrosCollection;
     }
 
-    public void setNamePrueba(Pruebas namePrueba) {
-        this.namePrueba = namePrueba;
+    public void setRegistrosCollection(Collection<Registros> registrosCollection) {
+        this.registrosCollection = registrosCollection;
     }
 
     @Override

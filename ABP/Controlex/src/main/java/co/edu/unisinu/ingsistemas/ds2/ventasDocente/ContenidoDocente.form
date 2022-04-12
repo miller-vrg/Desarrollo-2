@@ -73,9 +73,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="C"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrCActionPerformed"/>
-      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="40" y="240" width="60" height="-1"/>
@@ -92,9 +89,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="A"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrAActionPerformed"/>
-      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="40" y="160" width="50" height="-1"/>
@@ -184,7 +178,7 @@
           <Color blue="4d" green="29" red="29" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/img/limpiar.png"/>
+          <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/icons/limpiar.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Limpiar"/>
         <Property name="horizontalTextPosition" type="int" value="2"/>
@@ -210,7 +204,7 @@
           <Color blue="4d" green="29" red="29" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/img/guardar.png"/>
+          <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/icons/guardar.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Guardar"/>
         <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -236,7 +230,7 @@
           <Color blue="4d" green="29" red="29" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/img/tarea.png"/>
+          <Image iconType="3" name="/co/edu/unisinu/ingsistemas/ds2/icons/tarea.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Finalizar"/>
         <Property name="horizontalTextPosition" type="int" value="10"/>
@@ -246,7 +240,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="200" y="310" width="150" height="40"/>
+          <AbsoluteConstraints x="190" y="310" width="150" height="40"/>
         </Constraint>
       </Constraints>
     </Component>

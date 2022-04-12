@@ -27,31 +27,28 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Estudiantes.findAll", query = "SELECT e FROM Estudiantes e"),
     @NamedQuery(name = "Estudiantes.findByMatricula", query = "SELECT e FROM Estudiantes e WHERE e.matricula = :matricula"),
-    @NamedQuery(name = "Estudiantes.findByPassword", query = "SELECT e FROM Estudiantes e WHERE e.password = :password"),
     @NamedQuery(name = "Estudiantes.findByName", query = "SELECT e FROM Estudiantes e WHERE e.name = :name"),
-    @NamedQuery(name = "Estudiantes.findByApellido1", query = "SELECT e FROM Estudiantes e WHERE e.apellido1 = :apellido1"),
-    @NamedQuery(name = "Estudiantes.findByApellido2", query = "SELECT e FROM Estudiantes e WHERE e.apellido2 = :apellido2")})
+    @NamedQuery(name = "Estudiantes.findByApellidos", query = "SELECT e FROM Estudiantes e WHERE e.apellidos = :apellidos"),
+    @NamedQuery(name = "Estudiantes.findByPassword", query = "SELECT e FROM Estudiantes e WHERE e.password = :password")})
 public class Estudiantes implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "matricula")
+    @Column(name = "matricula", nullable = false)
     private Integer matricula;
-    @Column(name = "password")
-    private String password;
     @Basic(optional = false)
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 20)
     private String name;
     @Basic(optional = false)
-    @Column(name = "apellido_1")
-    private String apellido1;
+    @Column(name = "apellidos", nullable = false, length = 255)
+    private String apellidos;
     @Basic(optional = false)
-    @Column(name = "apellido_2")
-    private String apellido2;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAlumnoFk")
-    private Collection<Realizaciones> realizacionesCollection;
+    @Column(name = "password", nullable = false, length = 10)
+    private String password;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudianteId")
+    private Collection<Registros> registrosCollection;
 
     public Estudiantes() {
     }
@@ -60,11 +57,11 @@ public class Estudiantes implements Serializable {
         this.matricula = matricula;
     }
 
-    public Estudiantes(Integer matricula, String name, String apellido1, String apellido2) {
+    public Estudiantes(Integer matricula, String name, String apellidos, String password) {
         this.matricula = matricula;
         this.name = name;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
+        this.apellidos = apellidos;
+        this.password = password;
     }
 
     public Integer getMatricula() {
@@ -75,14 +72,6 @@ public class Estudiantes implements Serializable {
         this.matricula = matricula;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getName() {
         return name;
     }
@@ -91,28 +80,28 @@ public class Estudiantes implements Serializable {
         this.name = name;
     }
 
-    public String getApellido1() {
-        return apellido1;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setApellido1(String apellido1) {
-        this.apellido1 = apellido1;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public String getApellido2() {
-        return apellido2;
+    public String getPassword() {
+        return password;
     }
 
-    public void setApellido2(String apellido2) {
-        this.apellido2 = apellido2;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Collection<Realizaciones> getRealizacionesCollection() {
-        return realizacionesCollection;
+    public Collection<Registros> getRegistrosCollection() {
+        return registrosCollection;
     }
 
-    public void setRealizacionesCollection(Collection<Realizaciones> realizacionesCollection) {
-        this.realizacionesCollection = realizacionesCollection;
+    public void setRegistrosCollection(Collection<Registros> registrosCollection) {
+        this.registrosCollection = registrosCollection;
     }
 
     @Override

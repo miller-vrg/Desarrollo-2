@@ -13,6 +13,8 @@
     <class>co.edu.unisinu.ingsistemas.ds2.datos.Pruebas</class>
     <class>co.edu.unisinu.ingsistemas.ds2.datos.Creaciones</class>
     <class>co.edu.unisinu.ingsistemas.ds2.datos.Practicas</class>
+    <class>co.edu.unisinu.ingsistemas.ds2.datos.Datos</class>
+    <class>co.edu.unisinu.ingsistemas.ds2.datos.Registros</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/registros_abp?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

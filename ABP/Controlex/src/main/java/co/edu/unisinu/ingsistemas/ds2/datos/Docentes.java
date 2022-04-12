@@ -7,13 +7,10 @@ package co.edu.unisinu.ingsistemas.ds2.datos;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -27,58 +24,51 @@ import javax.persistence.Table;
 @Table(name = "docentes")
 @NamedQueries({
     @NamedQuery(name = "Docentes.findAll", query = "SELECT d FROM Docentes d"),
-    @NamedQuery(name = "Docentes.findByDni", query = "SELECT d FROM Docentes d WHERE d.dni = :dni"),
+    @NamedQuery(name = "Docentes.findById", query = "SELECT d FROM Docentes d WHERE d.id = :id"),
     @NamedQuery(name = "Docentes.findByName", query = "SELECT d FROM Docentes d WHERE d.name = :name"),
-    @NamedQuery(name = "Docentes.findByApellido1", query = "SELECT d FROM Docentes d WHERE d.apellido1 = :apellido1"),
-    @NamedQuery(name = "Docentes.findByApellido2", query = "SELECT d FROM Docentes d WHERE d.apellido2 = :apellido2"),
+    @NamedQuery(name = "Docentes.findByApellidos", query = "SELECT d FROM Docentes d WHERE d.apellidos = :apellidos"),
     @NamedQuery(name = "Docentes.findByPassword", query = "SELECT d FROM Docentes d WHERE d.password = :password")})
 public class Docentes implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "dni")
-    private Integer dni;
+    @Column(name = "id", nullable = false)
+    private Integer id;
     @Basic(optional = false)
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 20)
     private String name;
     @Basic(optional = false)
-    @Column(name = "apellido_1")
-    private String apellido1;
+    @Column(name = "apellidos", nullable = false, length = 100)
+    private String apellidos;
     @Basic(optional = false)
-    @Column(name = "apellido_2")
-    private String apellido2;
-    @Basic(optional = false)
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, length = 10)
     private String password;
-    @OneToMany(mappedBy = "dniDocente")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "docentesId")
     private Collection<Creaciones> creacionesCollection;
-    @JoinColumn(name = "id_listado_notas", referencedColumnName = "id")
-    @ManyToOne
-    private ListadoNotas idListadoNotas;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "docentesId")
+    private Collection<Registros> registrosCollection;
 
     public Docentes() {
     }
 
-    public Docentes(Integer dni) {
-        this.dni = dni;
+    public Docentes(Integer id) {
+        this.id = id;
     }
 
-    public Docentes(Integer dni, String name, String apellido1, String apellido2, String password) {
-        this.dni = dni;
+    public Docentes(Integer id, String name, String apellidos, String password) {
+        this.id = id;
         this.name = name;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
+        this.apellidos = apellidos;
         this.password = password;
     }
 
-    public Integer getDni() {
-        return dni;
+    public Integer getId() {
+        return id;
     }
 
-    public void setDni(Integer dni) {
-        this.dni = dni;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -89,20 +79,12 @@ public class Docentes implements Serializable {
         this.name = name;
     }
 
-    public String getApellido1() {
-        return apellido1;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setApellido1(String apellido1) {
-        this.apellido1 = apellido1;
-    }
-
-    public String getApellido2() {
-        return apellido2;
-    }
-
-    public void setApellido2(String apellido2) {
-        this.apellido2 = apellido2;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
     public String getPassword() {
@@ -121,18 +103,18 @@ public class Docentes implements Serializable {
         this.creacionesCollection = creacionesCollection;
     }
 
-    public ListadoNotas getIdListadoNotas() {
-        return idListadoNotas;
+    public Collection<Registros> getRegistrosCollection() {
+        return registrosCollection;
     }
 
-    public void setIdListadoNotas(ListadoNotas idListadoNotas) {
-        this.idListadoNotas = idListadoNotas;
+    public void setRegistrosCollection(Collection<Registros> registrosCollection) {
+        this.registrosCollection = registrosCollection;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (dni != null ? dni.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -143,7 +125,7 @@ public class Docentes implements Serializable {
             return false;
         }
         Docentes other = (Docentes) object;
-        if ((this.dni == null && other.dni != null) || (this.dni != null && !this.dni.equals(other.dni))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -151,7 +133,7 @@ public class Docentes implements Serializable {
 
     @Override
     public String toString() {
-        return "co.edu.unisinu.ingsistemas.ds2.datos.Docentes[ dni=" + dni + " ]";
+        return "co.edu.unisinu.ingsistemas.ds2.datos.Docentes[ id=" + id + " ]";
     }
     
 }

@@ -19,6 +19,13 @@ import javax.swing.*;
 
 public class ContenidoAlumno extends javax.swing.JPanel {
 
+    private String advertencia;
+    private ImageIcon iconAdvertencia;
+    private String correcto;
+    private ImageIcon iconCorrecto;
+    private String error;
+    private ImageIcon iconError;
+
     /**
      * Creates new form Contenido
      */
@@ -27,6 +34,16 @@ public class ContenidoAlumno extends javax.swing.JPanel {
     public ContenidoAlumno(){};
     public JPanel conte(String enunciado, String resA, String resB, String resC) {
         initComponents();
+        
+                
+        advertencia = "/co/edu/unisinu/ingsistemas/ds2/icons/advertencia.png";
+        iconAdvertencia = new ImageIcon(getClass().getResource(advertencia));
+        
+        correcto = "/co/edu/unisinu/ingsistemas/ds2/icons/correcto.png";
+        iconCorrecto = new ImageIcon(getClass().getResource(correcto));
+        
+        error = "/co/edu/unisinu/ingsistemas/ds2/icons/error.png";
+        iconError = new ImageIcon(getClass().getResource(error));
         
         jtEnunciado.setText(enunciado);
         jrA.setText(resA);
@@ -104,11 +121,7 @@ public class ContenidoAlumno extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrCActionPerformed
-
-        int dialogButton = JOptionPane.showConfirmDialog(null, "Despues de elejir la respuesta no la podras cabiar,\n ¿estas seguro de tu elecciòn?", "Confirmaciòn", JOptionPane.YES_NO_OPTION);
-        if (dialogButton == JOptionPane.YES_OPTION) {
-
-            try {
+                try {
                 File arch = new File("respuestas.txt");
                 if (arch.createNewFile()) {
                     System.out.println("Se creo creo el archivo de respuestas de usuario " + arch.getName());
@@ -125,26 +138,19 @@ public class ContenidoAlumno extends javax.swing.JPanel {
                 }
             } catch (IOException e) {
                 System.out.println("error al crear archivo de respuesta");
-                JOptionPane.showMessageDialog(null, "Error no se pueden guardar las respuestas", "ERROR!!!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error no se pueden guardar las respuestas", "ERROR!!!", JOptionPane.ERROR_MESSAGE,iconError);
                 e.printStackTrace();
             }
             jrA.setEnabled(false);
             jrB.setEnabled(false);
             jrC.setEnabled(false);
-        }
-        if (dialogButton == JOptionPane.NO_OPTION) {
-
-        }
-
+        
         System.out.print(respuesta);
 
     }//GEN-LAST:event_jrCActionPerformed
 
     private void jrAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrAActionPerformed
 
-        int dialogButton = JOptionPane.showConfirmDialog(null, "Despues de elejir la respuesta no la podras cabiar,\n ¿estas seguro de tu elecciòn?", "Confirmaciòn", JOptionPane.YES_NO_OPTION);
-        if (dialogButton == JOptionPane.YES_OPTION) {
-
             try {
                 File arch = new File("respuestas.txt");
                 if (arch.createNewFile()) {
@@ -162,24 +168,19 @@ public class ContenidoAlumno extends javax.swing.JPanel {
                 }
             } catch (IOException e) {
                 System.out.println("error al crear archivo de respuesta");
-                JOptionPane.showMessageDialog(null, "Error no se pueden guardar las respuestas", "ERROR!!!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error no se pueden guardar las respuestas", "ERROR!!!", JOptionPane.ERROR_MESSAGE,iconError);
                 e.printStackTrace();
             }
             jrA.setEnabled(false);
             jrB.setEnabled(false);
             jrC.setEnabled(false);
-        }
-        if (dialogButton == JOptionPane.NO_OPTION) {
-
-        }
+        
 
         System.out.print(respuesta);
     }//GEN-LAST:event_jrAActionPerformed
 
     private void jrBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrBActionPerformed
 
-        int dialogButton = JOptionPane.showConfirmDialog(null, "Despues de elejir la respuesta no la podras cabiar,\n ¿estas seguro de tu elecciòn?", "Confirmaciòn", JOptionPane.YES_NO_OPTION);
-        if (dialogButton == JOptionPane.YES_OPTION) {
             try {
                 File arch = new File("respuestas.txt");
                 if (arch.createNewFile()) {
@@ -197,16 +198,12 @@ public class ContenidoAlumno extends javax.swing.JPanel {
                 }
             } catch (IOException e) {
                 System.out.println("error al crear archivo de respuesta");
-                JOptionPane.showMessageDialog(null, "Error no se pueden guardar las respuestas", "ERROR!!!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error no se pueden guardar las respuestas", "ERROR!!!", JOptionPane.ERROR_MESSAGE,iconError);
                 e.printStackTrace();
             }
             jrA.setEnabled(false);
             jrB.setEnabled(false);
             jrC.setEnabled(false);
-        }
-        if (dialogButton == JOptionPane.NO_OPTION) {
-
-        }
         System.out.print(respuesta);
     }//GEN-LAST:event_jrBActionPerformed
 

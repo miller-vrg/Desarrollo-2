@@ -42,4 +42,5 @@ public class Reloj {
     return ( segundo%2 == 0 )? this.hora + ":" + this.minuto + ":" + this.segundo : this.hora + " " + this.minuto + " " + this.segundo ;    
     }
     
+
 }

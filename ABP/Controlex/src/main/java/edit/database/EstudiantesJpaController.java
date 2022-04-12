@@ -4,15 +4,15 @@
  */
 package edit.database;
 
-import co.edu.unisinu.ingsistemas.ds2.conector.exceptions.IllegalOrphanException;
-import co.edu.unisinu.ingsistemas.ds2.conector.exceptions.NonexistentEntityException;
 import co.edu.unisinu.ingsistemas.ds2.datos.Estudiantes;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import co.edu.unisinu.ingsistemas.ds2.datos.Realizaciones;
+import co.edu.unisinu.ingsistemas.ds2.datos.Registros;
+import edit.database.exceptions.IllegalOrphanException;
+import edit.database.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -23,9 +23,9 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author gasler
  */
-public class EstudiantesEdit implements Serializable {
+public class EstudiantesJpaController implements Serializable {
 
-    public EstudiantesEdit(EntityManagerFactory emf) {
+    public EstudiantesJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -35,27 +35,27 @@ public class EstudiantesEdit implements Serializable {
     }
 
     public void create(Estudiantes estudiantes) {
-        if (estudiantes.getRealizacionesCollection() == null) {
-            estudiantes.setRealizacionesCollection(new ArrayList<Realizaciones>());
+        if (estudiantes.getRegistrosCollection() == null) {
+            estudiantes.setRegistrosCollection(new ArrayList<Registros>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Realizaciones> attachedRealizacionesCollection = new ArrayList<Realizaciones>();
-            for (Realizaciones realizacionesCollectionRealizacionesToAttach : estudiantes.getRealizacionesCollection()) {
-                realizacionesCollectionRealizacionesToAttach = em.getReference(realizacionesCollectionRealizacionesToAttach.getClass(), realizacionesCollectionRealizacionesToAttach.getId());
-                attachedRealizacionesCollection.add(realizacionesCollectionRealizacionesToAttach);
+            Collection<Registros> attachedRegistrosCollection = new ArrayList<Registros>();
+            for (Registros registrosCollectionRegistrosToAttach : estudiantes.getRegistrosCollection()) {
+                registrosCollectionRegistrosToAttach = em.getReference(registrosCollectionRegistrosToAttach.getClass(), registrosCollectionRegistrosToAttach.getId());
+                attachedRegistrosCollection.add(registrosCollectionRegistrosToAttach);
             }
-            estudiantes.setRealizacionesCollection(attachedRealizacionesCollection);
+            estudiantes.setRegistrosCollection(attachedRegistrosCollection);
             em.persist(estudiantes);
-            for (Realizaciones realizacionesCollectionRealizaciones : estudiantes.getRealizacionesCollection()) {
-                Estudiantes oldIdAlumnoFkOfRealizacionesCollectionRealizaciones = realizacionesCollectionRealizaciones.getIdAlumnoFk();
-                realizacionesCollectionRealizaciones.setIdAlumnoFk(estudiantes);
-                realizacionesCollectionRealizaciones = em.merge(realizacionesCollectionRealizaciones);
-                if (oldIdAlumnoFkOfRealizacionesCollectionRealizaciones != null) {
-                    oldIdAlumnoFkOfRealizacionesCollectionRealizaciones.getRealizacionesCollection().remove(realizacionesCollectionRealizaciones);
-                    oldIdAlumnoFkOfRealizacionesCollectionRealizaciones = em.merge(oldIdAlumnoFkOfRealizacionesCollectionRealizaciones);
+            for (Registros registrosCollectionRegistros : estudiantes.getRegistrosCollection()) {
+                Estudiantes oldEstudianteIdOfRegistrosCollectionRegistros = registrosCollectionRegistros.getEstudianteId();
+                registrosCollectionRegistros.setEstudianteId(estudiantes);
+                registrosCollectionRegistros = em.merge(registrosCollectionRegistros);
+                if (oldEstudianteIdOfRegistrosCollectionRegistros != null) {
+                    oldEstudianteIdOfRegistrosCollectionRegistros.getRegistrosCollection().remove(registrosCollectionRegistros);
+                    oldEstudianteIdOfRegistrosCollectionRegistros = em.merge(oldEstudianteIdOfRegistrosCollectionRegistros);
                 }
             }
             em.getTransaction().commit();
@@ -72,36 +72,36 @@ public class EstudiantesEdit implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Estudiantes persistentEstudiantes = em.find(Estudiantes.class, estudiantes.getMatricula());
-            Collection<Realizaciones> realizacionesCollectionOld = persistentEstudiantes.getRealizacionesCollection();
-            Collection<Realizaciones> realizacionesCollectionNew = estudiantes.getRealizacionesCollection();
+            Collection<Registros> registrosCollectionOld = persistentEstudiantes.getRegistrosCollection();
+            Collection<Registros> registrosCollectionNew = estudiantes.getRegistrosCollection();
             List<String> illegalOrphanMessages = null;
-            for (Realizaciones realizacionesCollectionOldRealizaciones : realizacionesCollectionOld) {
-                if (!realizacionesCollectionNew.contains(realizacionesCollectionOldRealizaciones)) {
+            for (Registros registrosCollectionOldRegistros : registrosCollectionOld) {
+                if (!registrosCollectionNew.contains(registrosCollectionOldRegistros)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Realizaciones " + realizacionesCollectionOldRealizaciones + " since its idAlumnoFk field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Registros " + registrosCollectionOldRegistros + " since its estudianteId field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            Collection<Realizaciones> attachedRealizacionesCollectionNew = new ArrayList<Realizaciones>();
-            for (Realizaciones realizacionesCollectionNewRealizacionesToAttach : realizacionesCollectionNew) {
-                realizacionesCollectionNewRealizacionesToAttach = em.getReference(realizacionesCollectionNewRealizacionesToAttach.getClass(), realizacionesCollectionNewRealizacionesToAttach.getId());
-                attachedRealizacionesCollectionNew.add(realizacionesCollectionNewRealizacionesToAttach);
+            Collection<Registros> attachedRegistrosCollectionNew = new ArrayList<Registros>();
+            for (Registros registrosCollectionNewRegistrosToAttach : registrosCollectionNew) {
+                registrosCollectionNewRegistrosToAttach = em.getReference(registrosCollectionNewRegistrosToAttach.getClass(), registrosCollectionNewRegistrosToAttach.getId());
+                attachedRegistrosCollectionNew.add(registrosCollectionNewRegistrosToAttach);
             }
-            realizacionesCollectionNew = attachedRealizacionesCollectionNew;
-            estudiantes.setRealizacionesCollection(realizacionesCollectionNew);
+            registrosCollectionNew = attachedRegistrosCollectionNew;
+            estudiantes.setRegistrosCollection(registrosCollectionNew);
             estudiantes = em.merge(estudiantes);
-            for (Realizaciones realizacionesCollectionNewRealizaciones : realizacionesCollectionNew) {
-                if (!realizacionesCollectionOld.contains(realizacionesCollectionNewRealizaciones)) {
-                    Estudiantes oldIdAlumnoFkOfRealizacionesCollectionNewRealizaciones = realizacionesCollectionNewRealizaciones.getIdAlumnoFk();
-                    realizacionesCollectionNewRealizaciones.setIdAlumnoFk(estudiantes);
-                    realizacionesCollectionNewRealizaciones = em.merge(realizacionesCollectionNewRealizaciones);
-                    if (oldIdAlumnoFkOfRealizacionesCollectionNewRealizaciones != null && !oldIdAlumnoFkOfRealizacionesCollectionNewRealizaciones.equals(estudiantes)) {
-                        oldIdAlumnoFkOfRealizacionesCollectionNewRealizaciones.getRealizacionesCollection().remove(realizacionesCollectionNewRealizaciones);
-                        oldIdAlumnoFkOfRealizacionesCollectionNewRealizaciones = em.merge(oldIdAlumnoFkOfRealizacionesCollectionNewRealizaciones);
+            for (Registros registrosCollectionNewRegistros : registrosCollectionNew) {
+                if (!registrosCollectionOld.contains(registrosCollectionNewRegistros)) {
+                    Estudiantes oldEstudianteIdOfRegistrosCollectionNewRegistros = registrosCollectionNewRegistros.getEstudianteId();
+                    registrosCollectionNewRegistros.setEstudianteId(estudiantes);
+                    registrosCollectionNewRegistros = em.merge(registrosCollectionNewRegistros);
+                    if (oldEstudianteIdOfRegistrosCollectionNewRegistros != null && !oldEstudianteIdOfRegistrosCollectionNewRegistros.equals(estudiantes)) {
+                        oldEstudianteIdOfRegistrosCollectionNewRegistros.getRegistrosCollection().remove(registrosCollectionNewRegistros);
+                        oldEstudianteIdOfRegistrosCollectionNewRegistros = em.merge(oldEstudianteIdOfRegistrosCollectionNewRegistros);
                     }
                 }
             }
@@ -135,12 +135,12 @@ public class EstudiantesEdit implements Serializable {
                 throw new NonexistentEntityException("The estudiantes with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            Collection<Realizaciones> realizacionesCollectionOrphanCheck = estudiantes.getRealizacionesCollection();
-            for (Realizaciones realizacionesCollectionOrphanCheckRealizaciones : realizacionesCollectionOrphanCheck) {
+            Collection<Registros> registrosCollectionOrphanCheck = estudiantes.getRegistrosCollection();
+            for (Registros registrosCollectionOrphanCheckRegistros : registrosCollectionOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Estudiantes (" + estudiantes + ") cannot be destroyed since the Realizaciones " + realizacionesCollectionOrphanCheckRealizaciones + " in its realizacionesCollection field has a non-nullable idAlumnoFk field.");
+                illegalOrphanMessages.add("This Estudiantes (" + estudiantes + ") cannot be destroyed since the Registros " + registrosCollectionOrphanCheckRegistros + " in its registrosCollection field has a non-nullable estudianteId field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);

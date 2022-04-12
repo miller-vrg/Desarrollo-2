@@ -5,7 +5,6 @@
 package co.edu.unisinu.ingsistemas.ds2.datos;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,35 +22,36 @@ import javax.persistence.Table;
  * @author gasler
  */
 @Entity
-@Table(name = "realizaciones")
+@Table(name = "registros")
 @NamedQueries({
-    @NamedQuery(name = "Realizaciones.findAll", query = "SELECT r FROM Realizaciones r"),
-    @NamedQuery(name = "Realizaciones.findById", query = "SELECT r FROM Realizaciones r WHERE r.id = :id"),
-    @NamedQuery(name = "Realizaciones.findByNotas", query = "SELECT r FROM Realizaciones r WHERE r.notas = :notas")})
-public class Realizaciones implements Serializable {
+    @NamedQuery(name = "Registros.findAll", query = "SELECT r FROM Registros r"),
+    @NamedQuery(name = "Registros.findById", query = "SELECT r FROM Registros r WHERE r.id = :id"),
+    @NamedQuery(name = "Registros.findByNota", query = "SELECT r FROM Registros r WHERE r.nota = :nota")})
+public class Registros implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "notas")
-    private Float notas;
-    @OneToMany(mappedBy = "idRealizaciones")
-    private Collection<ListadoNotas> listadoNotasCollection;
-    @JoinColumn(name = "id_alumno_fk", referencedColumnName = "matricula")
+    @Column(name = "nota", precision = 12, scale = 0)
+    private Float nota;
+    @JoinColumn(name = "creaciones_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Estudiantes idAlumnoFk;
-    @JoinColumn(name = "id_pruebas", referencedColumnName = "name")
+    private Creaciones creacionesId;
+    @JoinColumn(name = "docentes_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Pruebas idPruebas;
+    private Docentes docentesId;
+    @JoinColumn(name = "estudiante_id", referencedColumnName = "matricula", nullable = false)
+    @ManyToOne(optional = false)
+    private Estudiantes estudianteId;
 
-    public Realizaciones() {
+    public Registros() {
     }
 
-    public Realizaciones(Integer id) {
+    public Registros(Integer id) {
         this.id = id;
     }
 
@@ -64,36 +63,36 @@ public class Realizaciones implements Serializable {
         this.id = id;
     }
 
-    public Float getNotas() {
-        return notas;
+    public Float getNota() {
+        return nota;
     }
 
-    public void setNotas(Float notas) {
-        this.notas = notas;
+    public void setNota(Float nota) {
+        this.nota = nota;
     }
 
-    public Collection<ListadoNotas> getListadoNotasCollection() {
-        return listadoNotasCollection;
+    public Creaciones getCreacionesId() {
+        return creacionesId;
     }
 
-    public void setListadoNotasCollection(Collection<ListadoNotas> listadoNotasCollection) {
-        this.listadoNotasCollection = listadoNotasCollection;
+    public void setCreacionesId(Creaciones creacionesId) {
+        this.creacionesId = creacionesId;
     }
 
-    public Estudiantes getIdAlumnoFk() {
-        return idAlumnoFk;
+    public Docentes getDocentesId() {
+        return docentesId;
     }
 
-    public void setIdAlumnoFk(Estudiantes idAlumnoFk) {
-        this.idAlumnoFk = idAlumnoFk;
+    public void setDocentesId(Docentes docentesId) {
+        this.docentesId = docentesId;
     }
 
-    public Pruebas getIdPruebas() {
-        return idPruebas;
+    public Estudiantes getEstudianteId() {
+        return estudianteId;
     }
 
-    public void setIdPruebas(Pruebas idPruebas) {
-        this.idPruebas = idPruebas;
+    public void setEstudianteId(Estudiantes estudianteId) {
+        this.estudianteId = estudianteId;
     }
 
     @Override
@@ -106,10 +105,10 @@ public class Realizaciones implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Realizaciones)) {
+        if (!(object instanceof Registros)) {
             return false;
         }
-        Realizaciones other = (Realizaciones) object;
+        Registros other = (Registros) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -118,7 +117,7 @@ public class Realizaciones implements Serializable {
 
     @Override
     public String toString() {
-        return "co.edu.unisinu.ingsistemas.ds2.datos.Realizaciones[ id=" + id + " ]";
+        return "co.edu.unisinu.ingsistemas.ds2.datos.Registros[ id=" + id + " ]";
     }
     
 }
