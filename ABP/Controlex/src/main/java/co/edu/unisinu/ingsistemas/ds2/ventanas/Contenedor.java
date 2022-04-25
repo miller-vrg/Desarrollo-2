@@ -84,7 +84,7 @@ public class Contenedor extends javax.swing.JPanel implements Runnable{
                 cn = objCn.getDriver();
                 
                 prepared = cn.prepareStatement("SELECT id FROM creaciones "
-                                             + "WHERE name = '" + this.name + "';");
+                                             + "WHERE nombre = '" + this.name + "';");
                 
                  resul = prepared.executeQuery();
                  int id = 0;

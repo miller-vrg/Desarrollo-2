@@ -134,7 +134,7 @@ public class Listado extends javax.swing.JDialog implements ItemListener{
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
      private void llenarTabla(){
     modelo  = new DefaultTableModel();
@@ -145,7 +145,7 @@ public class Listado extends javax.swing.JDialog implements ItemListener{
     PreparedStatement prepared = null;
     ResultSet resul = null;
     
-    String consulta = "SELECT name FROM creaciones"
+    String consulta = "SELECT nombre FROM creaciones"
                     + " WHERE tipo = '" + jlEncabezado.getText() + "';";
         
         try {
@@ -163,7 +163,7 @@ public class Listado extends javax.swing.JDialog implements ItemListener{
                 
             Object[] datos = new Object[3];
             datos[0]= con;
-            datos[1]= resul.getString("name");
+            datos[1]= resul.getString("nombre");
             con++;
             modelo.addRow(datos);
             

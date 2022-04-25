@@ -259,7 +259,8 @@ public class Home extends javax.swing.JFrame implements Runnable{
         System.out.println("258");
         if (("Practicas").equalsIgnoreCase(jlBtn1.getText())) {
             v = true;
-            String name = new Listado(new JFrame(), true, jlBtn1.getText(), usuario).getName();System.out.println("260");
+            String name = new Listado(new JFrame(), true, jlBtn1.getText(), usuario).getName();
+            System.out.println("260");
             System.out.println(name);
             if (name != null) {
                 jpIntercambio.removeAll();

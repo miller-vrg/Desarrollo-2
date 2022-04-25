@@ -26,6 +26,7 @@ import org.json.simple.parser.*;
  *
  * @author gasler (miler vargas mola)
  */
+
 public class Login extends javax.swing.JDialog implements ItemListener{
 
     private boolean veri = true;
@@ -36,10 +37,6 @@ public class Login extends javax.swing.JDialog implements ItemListener{
     private ImageIcon iconCorrecto;
     private String error;
     private ImageIcon iconError;
-    
-    /**
-     * Creates new form Login
-     */
 
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -63,8 +60,6 @@ public class Login extends javax.swing.JDialog implements ItemListener{
 
     public Login() {
     }
-
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -178,9 +173,6 @@ public class Login extends javax.swing.JDialog implements ItemListener{
     }//GEN-LAST:event_jpPasswordActionPerformed
 
     private void bntLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntLoginActionPerformed
-
-       usuario = jtUsuario.getText();
-       password = (String) jpPassword.getSelectedText();
        
        veri();
     }//GEN-LAST:event_bntLoginActionPerformed
@@ -236,18 +228,27 @@ public class Login extends javax.swing.JDialog implements ItemListener{
             
             while(resul.next()){
             System.out.println("192 " + tipo);
-                if( veriUser == false ){System.out.println("193 ");
-                    veriUser = (resul.getInt("matricula") == Integer.parseInt(usuario));System.out.println("194 ");
+            
+                if( veriUser == false ){
+                    System.out.println("193 ");
+                    
+                    veriUser = (resul.getInt("matricula") == Integer.parseInt(usuario));
+                    
+                    System.out.println("194 ");
                 }
-                if( veriPassword == false ){System.out.println("196 ");
-                    veriPassword = ((resul.getString("password")).equals(password));System.out.println("197 ");
+                if( veriPassword == false ){
+                    System.out.println("196 ");
+                    veriPassword = ((resul.getString("password")).equals(password));
+                    System.out.println("197 ");
                 }
                  if( veriUser == true && veriPassword == true){System.out.println("199 ");
                  
                  name = resul.getString("name") + " "
                          + resul.getString("apellidos");
                  tipo += ": ";
+                 
                  System.out.println("205" + tipo);
+                 
                  JOptionPane.showMessageDialog(null, "Inicio exitoso","Exito",0,iconCorrecto);
                  break;
                  }
