@@ -217,7 +217,7 @@ public class Home extends javax.swing.JFrame implements Runnable{
         jpHome.add(jlBtn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 380, 120, 30));
 
         btnCerrar.setBackground(new java.awt.Color(255, 214, 141));
-        btnCerrar.setIcon(new javax.swing.ImageIcon("/home/gasler/Documentos/Repositorios/Desarrollo-2/ABP/Controlex/src/main/java/co/edu/unisinu/ingsistemas/ds2/icons/cerrarsesion.png")); // NOI18N
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cerrarsesion.png"))); // NOI18N
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarActionPerformed(evt);

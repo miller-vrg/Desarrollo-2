@@ -201,12 +201,12 @@ public class ContenidoDocente extends javax.swing.JPanel {
             try {
                 objCn = new Conector();
                 cn = objCn.getDriver();
-                prepared = cn.prepareStatement("SELECT name FROM creaciones"
-                        + " WHERE name = '" + name + "';");
+                prepared = cn.prepareStatement("SELECT nombre FROM creaciones"
+                        + " WHERE nombre = '" + name + "';");
                 resul = prepared.executeQuery();
                 while (resul.next()) {
 
-                    name2 = resul.getString("name");
+                    name2 = resul.getString("nombre");
                     System.out.println(name2);
                 }
                 System.out.println("222 "+name2);
@@ -235,7 +235,7 @@ public class ContenidoDocente extends javax.swing.JPanel {
                         
                         objCn = new Conector();
                                 cn = objCn.getDriver();
-                                prepared = cn.prepareStatement("INSERT INTO creaciones(name,tipo,docentes_id,colaboradores)"
+                                prepared = cn.prepareStatement("INSERT INTO creaciones(nombre,tipo,docentes_id,colaboradores)"
                                         + "VALUE(?,?,?,?)");
                                 prepared.setString(1, name);
                                 prepared.setString(2, tipo);
@@ -264,12 +264,12 @@ public class ContenidoDocente extends javax.swing.JPanel {
                                 prepared.setString(3, datos.get("res-B"));
                                 prepared.setString(4, datos.get("res-C"));
                                 prepared.setString(5, datos.get("correcta"));
-                                prepared.setInt(6, idCreaciones());
+                                prepared.setInt(6, idCreaciones());System.out.println("line 267");
                                 prepared.executeUpdate();
                                  
                             } catch (SQLException ex) {
-
-                                JOptionPane.showMessageDialog(null, "No se pudo guardar su nota", "ERROR!!!", JOptionPane.ERROR_MESSAGE, iconError);
+                                System.out.println(ex);
+                                JOptionPane.showMessageDialog(null, "No se pudo guardar su prueba", "ERROR!!!", JOptionPane.ERROR_MESSAGE, iconError);
                                 System.out.println(ex);
                             } finally {
                                 objCn.close(cn, prepared);
@@ -348,6 +348,7 @@ public class ContenidoDocente extends javax.swing.JPanel {
 
     private int idCreaciones() {
 int r = 0;
+System.out.println("351");
             Conector objcn = null;
             Connection cn = null;
             PreparedStatement prepared = null;
@@ -357,13 +358,13 @@ int r = 0;
             objcn = new Conector();
             cn = objcn.getDriver();
             prepared = cn.prepareStatement("SELECT id FROM creaciones "
-                                         + "WHERE name = '" + name + "';");
+                                         + "WHERE nombre = '" + name + "';");
             resul = prepared.executeQuery();
-            
+            System.out.println("r: " +r);
             while(resul.next()){
             r = resul.getInt("id");
             }
-            
+            System.out.println("367r: " +r);
         } catch (SQLException ex) {
             Logger.getLogger(ContenidoDocente.class.getName()).log(Level.SEVERE, null, ex);
         }
